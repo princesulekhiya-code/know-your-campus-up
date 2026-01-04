@@ -270,3 +270,5 @@ Built with ❤️ for students across India
 ---
 
 **Know Your Campus** - Find Your Dream College Today!
+#   k n o w - y o u r - c a m p u s  
+ 
