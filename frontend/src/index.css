@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   UNIFIED DESIGN TOKEN SYSTEM - WCAG COMPLIANT
+   ═══════════════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* Light Mode Semantic Tokens */
+    --bg-primary: 255 255 255;
+    /* #FFFFFF */
+    --bg-secondary: 248 250 252;
+    /* #F8FAFC */
+    --bg-muted: 241 245 249;
+    /* #F1F5F9 */
+    --text-primary: 2 6 23;
+    /* #020617 */
+    --text-secondary: 51 65 85;
+    /* #334155 */
+    --text-muted: 100 116 139;
+    /* #64748B */
+    --border-default: 226 232 240;
+    /* #E2E8F0 */
+    --button-primary-bg: 37 99 235;
+    /* #2563EB */
+    --button-primary-hover: 29 78 216;
+    /* #1D4ED8 */
+    --button-primary-active: 30 64 175;
+    /* #1E40AF */
+  }
+
+  .dark {
+    /* Dark Mode Semantic Tokens - NO PURE WHITE */
+    --bg-primary: 2 6 23;
+    /* #020617 */
+    --bg-secondary: 15 23 42;
+    /* #0F172A */
+    --bg-muted: 30 41 59;
+    /* #1E293B */
+    --text-primary: 248 250 252;
+    /* #F8FAFC */
+    --text-secondary: 203 213 225;
+    /* #CBD5E1 */
+    --text-muted: 148 163 184;
+    /* #94A3B8 */
+    --border-default: 30 41 59;
+    /* #1E293B */
+    --button-primary-bg: 37 99 235;
+    /* #2563EB */
+    --button-primary-hover: 29 78 216;
+    /* #1D4ED8 */
+    --button-primary-active: 30 64 175;
+    /* #1E40AF */
+  }
+
+  * {
+    @apply border-brand-200 dark:border-brand-700;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: rgb(var(--bg-primary));
+    color: rgb(var(--text-primary));
+    @apply font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    @apply bg-action-600/20 text-action-900 dark:text-action-100;
+  }
+
+  /* Remove autofill yellow/white background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(var(--bg-secondary)) inset !important;
+    -webkit-text-fill-color: rgb(var(--text-primary)) !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTON SYSTEM - FIXED STATES (NO WHITE FLASH)
+   ═══════════════════════════════════════════════════════════ */
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-action-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: rgb(var(--button-primary-bg));
+    color: #FFFFFF;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: rgb(var(--button-primary-hover));
+  }
+
+  .btn-primary:active:not(:disabled) {
+    background-color: rgb(var(--button-primary-active));
+    transform: scale(0.98);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg border shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+    background-color: rgb(var(--bg-primary));
+    color: rgb(var(--text-primary));
+    border-color: rgb(var(--border-default));
+  }
+
+  .btn-secondary:hover {
+    background-color: rgb(var(--bg-muted));
+  }
+
+  .btn-secondary:active {
+    background-color: rgb(var(--bg-secondary));
+    transform: scale(0.98);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 font-medium rounded-lg border-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+    background-color: transparent;
+    color: rgb(var(--text-secondary));
+    border-color: rgb(var(--border-default));
+  }
+
+  .btn-outline:hover {
+    background-color: rgb(var(--bg-muted));
+  }
+
+  .btn-outline:active {
+    background-color: rgb(var(--bg-secondary));
+    transform: scale(0.98);
+  }
+
+  .card {
+    @apply rounded-xl border shadow-soft hover:shadow-soft-lg transition-all duration-300;
+    background-color: rgb(var(--bg-primary));
+    border-color: rgb(var(--border-default));
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl rounded-xl border shadow-soft hover:shadow-soft-lg transition-all duration-300;
+    background-color: rgba(var(--bg-primary), 0.8);
+    border-color: rgba(var(--border-default), 0.5);
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-action-500 focus-visible:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: rgb(var(--bg-secondary));
+    color: rgb(var(--text-primary));
+    border-color: rgb(var(--border-default));
+  }
+
+  .input-field::placeholder {
+    color: rgb(var(--text-muted));
+  }
+
+  .input-field:focus {
+    background-color: rgb(var(--bg-primary));
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200;
+  }
+
+  .badge-success {
+    @apply bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800;
+  }
+
+  .badge-warning {
+    @apply bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800;
+  }
+
+  .badge-info {
+    @apply bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-action-600 to-action-700 bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-1;
+  }
+
+  .focus-glow {
+    @apply focus-visible:ring-2 focus-visible:ring-action-500 focus-visible:ring-offset-2 focus:outline-none;
+  }
+
+  .skeleton {
+    @apply animate-shimmer bg-gradient-to-r from-brand-200 via-brand-100 to-brand-200 dark:from-brand-700 dark:via-brand-600 dark:to-brand-700 bg-[length:1000px_100%] rounded;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .backdrop-glass {
+    @apply backdrop-blur-xl;
+    background-color: rgba(var(--bg-primary), 0.8);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-brand-100 dark:bg-brand-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-300 dark:bg-brand-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-400 dark:bg-brand-500;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}

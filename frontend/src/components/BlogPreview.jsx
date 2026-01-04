@@ -1,0 +1,132 @@
+import { motion } from 'framer-motion';
+import { FiCalendar, FiArrowRight, FiTrendingUp } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+
+const BlogPreview = () => {
+    const blogPosts = [
+        {
+            id: 1,
+            title: "Top 10 Engineering Colleges in India 2024",
+            excerpt: "Discover the best engineering colleges with highest placements, world-class faculty, and cutting-edge infrastructure...",
+            category: "Rankings",
+            date: "Jan 3, 2024",
+            readTime: "5 min read",
+            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=250&fit=crop",
+            trending: true
+        },
+        {
+            id: 2,
+            title: "JEE Main 2024: Important Dates & Preparation Tips",
+            excerpt: "Complete guide to JEE Main 2024 including exam dates, syllabus, preparation strategy, and expert tips...",
+            category: "Exams",
+            date: "Jan 2, 2024",
+            readTime: "8 min read",
+            image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop",
+            trending: false
+        },
+        {
+            id: 3,
+            title: "Scholarship Opportunities for Engineering Students",
+            excerpt: "Explore various scholarship programs available for engineering students including government and private scholarships...",
+            category: "Scholarships",
+            date: "Dec 30, 2023",
+            readTime: "6 min read",
+            image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
+            trending: true
+        }
+    ];
+
+    return (
+        <section className="py-20 bg-white dark:bg-brand-900">
+            <div className="container mx-auto px-4">
+                {/* Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-12"
+                >
+                    <h2 className="text-4xl md:text-5xl font-bold text-brand-900 dark:text-white mb-4">
+                        Latest Updates & Guides
+                    </h2>
+                    <p className="text-xl text-brand-600 dark:text-brand-400 max-w-2xl mx-auto">
+                        Stay updated with admission news, exam tips, and college guides
+                    </p>
+                </motion.div>
+
+                {/* Blog Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                    {blogPosts.map((post, index) => (
+                        <motion.article
+                            key={post.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className="group cursor-pointer"
+                        >
+                            <div className="bg-white dark:bg-brand-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-brand-200 dark:border-brand-700">
+                                {/* Image */}
+                                <div className="relative overflow-hidden h-48">
+                                    <img
+                                        src={post.image}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    {post.trending && (
+                                        <div className="absolute top-4 right-4 px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full flex items-center space-x-1">
+                                            <FiTrendingUp className="w-3 h-3" />
+                                            <span>Trending</span>
+                                        </div>
+                                    )}
+                                    <div className="absolute top-4 left-4 px-3 py-1 bg-action-600 text-white text-xs font-semibold rounded-full">
+                                        {post.category}
+                                    </div>
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-6">
+                                    <div className="flex items-center space-x-4 text-xs text-brand-500 dark:text-brand-400 mb-3">
+                                        <span className="flex items-center space-x-1">
+                                            <FiCalendar className="w-3 h-3" />
+                                            <span>{post.date}</span>
+                                        </span>
+                                        <span>•</span>
+                                        <span>{post.readTime}</span>
+                                    </div>
+
+                                    <h3 className="text-lg font-bold text-brand-900 dark:text-white mb-2 group-hover:text-action-600 dark:group-hover:text-action-400 transition-colors line-clamp-2">
+                                        {post.title}
+                                    </h3>
+
+                                    <p className="text-sm text-brand-600 dark:text-brand-400 mb-4 line-clamp-2">
+                                        {post.excerpt}
+                                    </p>
+
+                                    <div className="flex items-center text-action-600 dark:text-action-400 font-semibold text-sm group-hover:translate-x-2 transition-transform">
+                                        <span>Read More</span>
+                                        <FiArrowRight className="w-4 h-4 ml-2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.article>
+                    ))}
+                </div>
+
+                {/* View All Button */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                >
+                    <Link to="/blog" className="btn-outline inline-block">
+                        View All Articles
+                    </Link>
+                </motion.div>
+            </div>
+        </section>
+    );
+};
+
+export default BlogPreview;
