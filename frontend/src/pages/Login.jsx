@@ -22,7 +22,7 @@ const Login = () => {
             const { token, email: userEmail, fullName, role } = response.data;
 
             login({ email: userEmail, fullName, role }, token);
-            navigate('/admin/dashboard');
+            navigate('/admin');
         } catch (err) {
             setError('Invalid email or password');
         } finally {

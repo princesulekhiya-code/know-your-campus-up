@@ -1,27 +1,35 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FiMapPin, FiPhone, FiMail, FiGlobe, FiAward, FiCalendar } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiMail, FiGlobe, FiAward, FiCalendar, FiStar } from 'react-icons/fi';
 import AdmissionCTA from '../components/AdmissionCTA';
 import LoadingSpinner from '../components/LoadingSpinner';
+import WriteReviewForm from '../components/WriteReviewForm';
+import ReviewsList from '../components/ReviewsList';
+import StarRating from '../components/StarRating';
 import collegeService, { courseService, seatService, feeService, cutoffService } from '../services/collegeService';
+import reviewService from '../services/reviewService';
 import trackPageVisit from '../utils/tracking';
 
 const CollegeDetails = () => {
     const { id } = useParams();
     const [college, setCollege] = useState(null);
     const [courses, setCourses] = useState([]);
+    const [reviewStats, setReviewStats] = useState({ averageRating: 0, totalReviews: 0 });
+    const [showReviewForm, setShowReviewForm] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadCollegeDetails = async () => {
             try {
-                const [collegeRes, coursesRes] = await Promise.all([
+                const [collegeRes, coursesRes, reviewStatsRes] = await Promise.all([
                     collegeService.getById(id),
                     courseService.getByCollegeId(id),
+                    reviewService.getCollegeStats(id),
                 ]);
 
                 setCollege(collegeRes.data);
                 setCourses(coursesRes.data);
+                setReviewStats(reviewStatsRes.data);
 
                 trackPageVisit(`/colleges/${id}`, collegeRes.data.name, parseInt(id));
             } catch (error) {
@@ -35,7 +43,31 @@ const CollegeDetails = () => {
     }, [id]);
 
     if (loading) return <LoadingSpinner />;
-    if (!college) return <div className="text-center py-12">College not found</div>;
+
+    if (!college) {
+        return (
+            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+                <div className="text-center max-w-md">
+                    <div className="mb-8">
+                        <h1 className="text-6xl font-bold text-gray-300 dark:text-gray-700 mb-4">404</h1>
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">College Not Found</h2>
+                        <p className="text-gray-600 dark:text-gray-400">
+                            The college you're looking for doesn't exist or has been removed.
+                        </p>
+                    </div>
+                    <div className="space-y-3">
+                        <a href="/colleges" className="btn-primary inline-block">
+                            Browse All Colleges
+                        </a>
+                        <br />
+                        <a href="/" className="text-primary-600 hover:text-primary-700 dark:text-primary-400">
+                            ← Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -71,6 +103,13 @@ const CollegeDetails = () => {
                                     <FiCalendar className="w-5 h-5 mr-2" />
                                     <span>Est. {college.establishedYear}</span>
                                 </div>
+                                {reviewStats.totalReviews > 0 && (
+                                    <div className="flex items-center">
+                                        <FiStar className="w-5 h-5 mr-2 text-yellow-400 fill-yellow-400" />
+                                        <span className="font-semibold">{reviewStats.averageRating.toFixed(1)}</span>
+                                        <span className="ml-1">({reviewStats.totalReviews} {reviewStats.totalReviews === 1 ? 'review' : 'reviews'})</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         {college.admissionOpen && (
@@ -194,7 +233,51 @@ const CollegeDetails = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Reviews Section */}
+                <div className="card p-6 mb-8">
+                    <div className="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Student Reviews</h2>
+                            {reviewStats.totalReviews > 0 && (
+                                <div className="flex items-center space-x-3">
+                                    <StarRating rating={Math.round(reviewStats.averageRating)} size={24} />
+                                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                                        {reviewStats.averageRating.toFixed(1)}
+                                    </span>
+                                    <span className="text-gray-500 dark:text-gray-400">
+                                        Based on {reviewStats.totalReviews} {reviewStats.totalReviews === 1 ? 'review' : 'reviews'}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                        <button
+                            onClick={() => setShowReviewForm(true)}
+                            className="btn-primary flex items-center space-x-2"
+                        >
+                            <FiStar size={18} />
+                            <span>Write a Review</span>
+                        </button>
+                    </div>
+
+                    <ReviewsList collegeId={id} />
+                </div>
             </div>
+
+            {/* Write Review Modal */}
+            {showReviewForm && (
+                <WriteReviewForm
+                    collegeId={parseInt(id)}
+                    collegeName={college.name}
+                    onClose={() => setShowReviewForm(false)}
+                    onSuccess={() => {
+                        // Refresh review stats after submission
+                        reviewService.getCollegeStats(id).then(res => {
+                            setReviewStats(res.data);
+                        });
+                    }}
+                />
+            )}
         </div>
     );
 };

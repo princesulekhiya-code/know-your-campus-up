@@ -13,12 +13,14 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token'));
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (token) {
             const userData = JSON.parse(localStorage.getItem('user') || '{}');
             setUser(userData);
         }
+        setLoading(false);
     }, [token]);
 
     const login = (userData, authToken) => {
@@ -38,6 +40,7 @@ export const AuthProvider = ({ children }) => {
     const value = {
         user,
         token,
+        loading,
         isAuthenticated: !!token,
         login,
         logout

@@ -1,14 +1,69 @@
 import { motion } from 'framer-motion';
-import { FiCalendar, FiClock, FiAlertCircle } from 'react-icons/fi';
+import { FiCalendar, FiAlertCircle } from 'react-icons/fi';
+import { useEffect, useState, useRef } from 'react';
+import notificationService from '../services/notificationService';
 
 const ExamNotificationBar = () => {
-    const notifications = [
-        { text: "JEE Main 2024 Registration closes on January 15th!", urgent: true },
-        { text: "NEET UG 2024 Application forms available now.", urgent: false },
-        { text: "BITSAT 2024 Exam Dates Announced - Check Now", urgent: true },
-        { text: "VITEEE 2024 Slot Booking starts next week", urgent: false },
-        { text: "GATE 2024 Admit Cards Released", urgent: true }
-    ];
+    const [notifications, setNotifications] = useState([]);
+    const [shouldScroll, setShouldScroll] = useState(false);
+    const containerRef = useRef(null);
+    const contentRef = useRef(null);
+
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const response = await notificationService.getActive();
+                setNotifications(response.data);
+            } catch (error) {
+                console.error('Failed to fetch notifications:', error);
+            }
+        };
+
+        fetchNotifications();
+    }, []);
+
+    useEffect(() => {
+        const checkScroll = () => {
+            if (containerRef.current && contentRef.current) {
+                const containerWidth = containerRef.current.offsetWidth;
+                const contentWidth = contentRef.current.scrollWidth;
+                // Enable scroll only if content is wider than container
+                setShouldScroll(contentWidth > containerWidth);
+            }
+        };
+
+        // Check initially and on resize
+        checkScroll();
+        window.addEventListener('resize', checkScroll);
+
+        // Small timeout to ensure DOM is rendered before measuring
+        const timer = setTimeout(checkScroll, 100);
+
+        return () => {
+            window.removeEventListener('resize', checkScroll);
+            clearTimeout(timer);
+        };
+    }, [notifications]);
+
+    if (notifications.length === 0) return null;
+
+    const NotificationItem = ({ note }) => (
+        <span className="inline-flex items-center space-x-3 text-sm text-brand-50 relative z-20">
+            <FiCalendar className="w-4 h-4 text-action-400 flex-shrink-0" />
+            {note.eventDate && (
+                <span className="bg-action-600 text-white text-xs px-2 py-0.5 rounded font-bold">
+                    {note.eventDate}
+                </span>
+            )}
+            {note.link ? (
+                <a href={note.link} target="_blank" rel="noopener noreferrer" className={`hover:underline hover:text-white transition-colors ${note.isUrgent ? "font-bold text-white" : ""}`}>
+                    {note.text}
+                </a>
+            ) : (
+                <span className={note.isUrgent ? "font-bold text-white" : ""}>{note.text}</span>
+            )}
+        </span>
+    );
 
     return (
         <div className="bg-brand-900 border-b border-brand-800 text-white overflow-hidden py-3 relative z-40">
@@ -18,27 +73,45 @@ const ExamNotificationBar = () => {
                     <span>LATEST UPDATES</span>
                 </div>
 
-                <div className="flex-1 overflow-hidden relative">
-                    <motion.div
-                        className="flex items-center space-x-12 whitespace-nowrap"
-                        animate={{ x: ["100%", "-100%"] }}
-                        transition={{
-                            repeat: Infinity,
-                            duration: 25,
-                            ease: "linear"
-                        }}
-                    >
-                        {[...notifications, ...notifications].map((note, index) => (
-                            <span key={index} className="flex items-center space-x-2 text-sm text-brand-100">
-                                <FiCalendar className="w-4 h-4 text-action-400" />
-                                <span className={note.urgent ? "font-semibold text-white" : ""}>{note.text}</span>
-                            </span>
-                        ))}
-                    </motion.div>
+                <div className="flex-1 overflow-hidden relative h-6 flex items-center" ref={containerRef}>
+                    {shouldScroll ? (
+                        <motion.div
+                            className="flex items-center whitespace-nowrap pl-4"
+                            animate={{ x: ["-0%", "-50%"] }}
+                            transition={{
+                                repeat: Infinity,
+                                duration: Math.max(20, notifications.length * 8),
+                                ease: "linear"
+                            }}
+                            style={{ width: "fit-content", minWidth: "200%" }}
+                        >
+                            {/* First Set */}
+                            <div className="flex items-center space-x-16 pr-16 bg-blue-500/0">
+                                {notifications.map((note, index) => (
+                                    <NotificationItem key={`orig-${index}`} note={note} />
+                                ))}
+                            </div>
+                            {/* Duplicate Set for Loop */}
+                            <div className="flex items-center space-x-16 pr-16 bg-red-500/0">
+                                {notifications.map((note, index) => (
+                                    <NotificationItem key={`dup-${index}`} note={note} />
+                                ))}
+                            </div>
+                        </motion.div>
+                    ) : (
+                        // Static content for measurement and display if short
+                        <div ref={contentRef} className="flex items-center whitespace-nowrap pl-4 w-full">
+                            <div className="flex items-center space-x-16">
+                                {notifications.map((note, index) => (
+                                    <NotificationItem key={index} note={note} />
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     {/* Gradients for smooth fade on edges */}
-                    <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-brand-900 to-transparent z-10"></div>
-                    <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-brand-900 to-transparent z-10"></div>
+                    <div className="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-brand-900 to-transparent z-30 pointer-events-none"></div>
+                    <div className="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-brand-900 to-transparent z-30 pointer-events-none"></div>
                 </div>
             </div>
         </div>

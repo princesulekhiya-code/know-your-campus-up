@@ -36,16 +36,23 @@ export const courseService = {
 
 export const seatService = {
     getByCourseId: (courseId) => api.get(`/seats/course/${courseId}`),
+    create: (data) => api.post('/seats', data),
     update: (id, data) => api.put(`/seats/${id}`, data),
+    delete: (id) => api.delete(`/seats/${id}`),
 };
 
 export const feeService = {
     getByCourseId: (courseId) => api.get(`/fees/course/${courseId}`),
+    create: (data) => api.post('/fees', data),
     update: (id, data) => api.put(`/fees/${id}`, data),
+    delete: (id) => api.delete(`/fees/${id}`),
 };
 
 export const cutoffService = {
     getByCourseId: (courseId) => api.get(`/cutoffs/course/${courseId}`),
+    create: (data) => api.post('/cutoffs', data),
+    update: (id, data) => api.put(`/cutoffs/${id}`, data),
+    delete: (id) => api.delete(`/cutoffs/${id}`),
 };
 
 export default collegeService;

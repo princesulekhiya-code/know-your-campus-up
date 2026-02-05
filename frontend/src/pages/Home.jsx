@@ -11,7 +11,6 @@ import Testimonials from '../components/Testimonials';
 import BlogPreview from '../components/BlogPreview';
 import Newsletter from '../components/Newsletter';
 import StreamCategory from '../components/StreamCategory';
-import StreamCategory from '../components/StreamCategory';
 import HowItWorks from '../components/HowItWorks';
 import collegeService from '../services/collegeService';
 import trackPageVisit from '../utils/tracking';
