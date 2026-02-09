@@ -66,6 +66,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/leads/submit", "/leads/submit").permitAll()
                         .requestMatchers("/api/tracking/**", "/tracking/**").permitAll()
                         .requestMatchers("/api/notifications/active", "/notifications/active").permitAll()
+                        .requestMatchers("/api/reviews/college/**", "/reviews/college/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

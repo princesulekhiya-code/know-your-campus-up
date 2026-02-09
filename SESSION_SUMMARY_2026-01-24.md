@@ -133,7 +133,7 @@
 3. Find "B.Tech - Computer Science" course
 4. Click 📈 purple Cutoff button
 5. Fill form:
-   - Academic Year: 2024-2025
+   - Academic Year: 2026-27
    - Category: GENERAL
    - Round: Round 1
    - Exam Type: JEE Main

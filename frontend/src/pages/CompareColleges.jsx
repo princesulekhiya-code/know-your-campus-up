@@ -14,6 +14,11 @@ const CompareColleges = () => {
         trackPageVisit('/compare', 'Compare Colleges');
     }, []);
 
+
+      //   search for  the  collage   to compare  and  show the result in the list and the user can click on  the collage   to  add  in the compare list  abd the  user con  add up to 
+      //   collage and   the user can remove  the collage the   compare    list and the
+       
+
     const handleSearch = async () => {
         if (!searchQuery.trim()) return;
 
@@ -27,6 +32,8 @@ const CompareColleges = () => {
             setLoading(false);
         }
     };
+
+
 
     const addCollege = (college) => {
         if (selectedColleges.length >= 3) {
@@ -55,6 +62,10 @@ const CompareColleges = () => {
                         Compare up to 3 colleges side-by-side
                     </p>
                 </div>
+
+
+
+
 
                 {/* Search */}
                 <div className="max-w-2xl mx-auto mb-8">

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mysql:*)",
+      "Bash(findstr:*)",
+      "Read(//d/**)",
+      "Bash(curl:*)"
+    ]
+  }
+}

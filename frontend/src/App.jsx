@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
@@ -43,43 +44,45 @@ const PublicLayout = () => (
 
 function App() {
     return (
-        <ThemeProvider>
-            <AuthProvider>
-                <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                    <ScrollToTop />
-                    <Toaster position="top-right" />
-                    <Routes>
-                        {/* Public Routes wrapped in PublicLayout */}
-                        <Route element={<PublicLayout />}>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/colleges" element={<Colleges />} />
-                            <Route path="/colleges/:id" element={<CollegeDetails />} />
-                            <Route path="/compare" element={<CompareColleges />} />
-                            <Route path="/admission" element={<AdmissionForm />} />
-                            <Route path="/contact" element={<Contact />} />
-                            <Route path="/login" element={<Login />} />
-                        </Route>
+        <HelmetProvider>
+            <ThemeProvider>
+                <AuthProvider>
+                    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                        <ScrollToTop />
+                        <Toaster position="top-right" />
+                        <Routes>
+                            {/* Public Routes wrapped in PublicLayout */}
+                            <Route element={<PublicLayout />}>
+                                <Route path="/" element={<Home />} />
+                                <Route path="/colleges" element={<Colleges />} />
+                                <Route path="/colleges/:id" element={<CollegeDetails />} />
+                                <Route path="/compare" element={<CompareColleges />} />
+                                <Route path="/admission" element={<AdmissionForm />} />
+                                <Route path="/contact" element={<Contact />} />
+                                <Route path="/login" element={<Login />} />
+                            </Route>
 
-                        {/* Admin Routes - No Public Headers/Footers */}
-                        <Route
-                            path="/admin"
-                            element={
-                                <ProtectedRoute role="ADMIN">
-                                    <AdminDashboard />
-                                </ProtectedRoute>
-                            }
-                        >
-                            <Route index element={<AnalyticsDashboard />} />
-                            <Route path="dashboard" element={<Navigate to="/admin" replace />} />
-                            <Route path="notifications" element={<ManageNotifications />} />
-                            <Route path="colleges" element={<ManageColleges />} />
-                            <Route path="courses" element={<ManageCourses />} />
-                            <Route path="reviews" element={<ManageReviews />} />
-                        </Route>
-                    </Routes>
-                </Router>
-            </AuthProvider>
-        </ThemeProvider>
+                            {/* Admin Routes - No Public Headers/Footers */}
+                            <Route
+                                path="/admin"
+                                element={
+                                    <ProtectedRoute role="ADMIN">
+                                        <AdminDashboard />
+                                    </ProtectedRoute>
+                                }
+                            >
+                                <Route index element={<AnalyticsDashboard />} />
+                                <Route path="dashboard" element={<Navigate to="/admin" replace />} />
+                                <Route path="notifications" element={<ManageNotifications />} />
+                                <Route path="colleges" element={<ManageColleges />} />
+                                <Route path="courses" element={<ManageCourses />} />
+                                <Route path="reviews" element={<ManageReviews />} />
+                            </Route>
+                        </Routes>
+                    </Router>
+                </AuthProvider>
+            </ThemeProvider>
+        </HelmetProvider>
     );
 }
 

@@ -36,7 +36,7 @@ public class SeatMatrix {
     private Integer availableSeats;
 
     @Column(nullable = false)
-    private String academicYear; // 2024-2025
+    private String academicYear; // 2026-27
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

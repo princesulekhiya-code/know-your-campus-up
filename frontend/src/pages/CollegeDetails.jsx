@@ -226,9 +226,12 @@ const CollegeDetails = () => {
                         {/* Contact CTA */}
                         <div className="card p-6 bg-gradient-to-br from-primary-600 to-secondary-600 text-white">
                             <h3 className="text-xl font-bold mb-2">Need Help?</h3>
-                            <p className="mb-4">Talk to our counsellors</p>
-                            <a href="tel:9009536046" className="btn-primary bg-white text-primary-600 hover:bg-gray-100 w-full text-center block">
-                                Call 9009536046
+                            <p className="mb-4 opacity-90">Talk to our counsellors</p>
+                            <a
+                                href="tel:9009536046"
+                                className="inline-block w-full text-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-200"
+                            >
+                                📞 Call 9009536046
                             </a>
                         </div>
                     </div>

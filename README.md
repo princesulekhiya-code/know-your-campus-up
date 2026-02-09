@@ -255,7 +255,7 @@ CREATE TABLE courses (
 CREATE TABLE fee_structures (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     course_id BIGINT NOT NULL,
-    academic_year VARCHAR(20),            -- 2024-2025
+    academic_year VARCHAR(20),            -- 2026-27
     tuition_fee DECIMAL(12,2),
     hostel_fee DECIMAL(12,2),
     transport_fee DECIMAL(12,2),
@@ -697,29 +697,111 @@ VITE_API_URL=http://localhost:8081/api
 
 ## 🚀 Deployment
 
+### **Quick Deploy (15 minutes)**
+
+See **[QUICK_DEPLOY.md](./QUICK_DEPLOY.md)** for step-by-step deployment instructions.
+
+### **Deployment Options**
+
+1. **Frontend (React + Vite)**
+   - ✅ **Vercel** (Recommended) - Free, automatic HTTPS
+   - Netlify - Alternative option
+   - AWS S3 + CloudFront - Enterprise
+
+2. **Backend (Spring Boot)**
+   - ✅ **Railway** (Recommended) - Free tier, includes MySQL
+   - Render - Alternative option
+   - AWS EC2 - Enterprise
+
+3. **Database**
+   - ✅ **Railway MySQL** (Included with backend)
+   - PlanetScale - Serverless MySQL
+   - AWS RDS - Enterprise
+
+### **Deployment Guides**
+
+📚 **Complete Guides Available:**
+- **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - Comprehensive deployment guide
+- **[QUICK_DEPLOY.md](./QUICK_DEPLOY.md)** - Quick start (15 min)
+- **[DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md)** - Step-by-step checklist
+- **[SEO_GUIDE.md](./SEO_GUIDE.md)** - Google Search optimization
+
 ### **Production Checklist**
 
 ✅ **Backend:**
 - [ ] Change `jwt.secret` to strong random key (256-bit)
 - [ ] Set `spring.jpa.show-sql=false`
 - [ ] Use environment variables for sensitive data
-- [ ] Enable HTTPS
+- [ ] Enable HTTPS (automatic on Railway)
 - [ ] Configure CORS for production domain
 - [ ] Set `spring.jpa.hibernate.ddl-auto=validate`
-- [ ] Set up database backups
+- [ ] Set up database backups (automatic on Railway)
 
 ✅ **Frontend:**
-- [ ] Update `API_BASE_URL` to production backend
+- [ ] Update `VITE_API_URL` to production backend
 - [ ] Build production bundle: `npm run build`
-- [ ] Enable CDN for assets
-- [ ] Configure SSL certificate
-- [ ] Set up domain DNS
+- [ ] Enable CDN for assets (automatic on Vercel)
+- [ ] Configure SSL certificate (automatic on Vercel)
+- [ ] Set up custom domain (optional)
 
 ✅ **Database:**
-- [ ] Backup strategy
+- [ ] Backup strategy (automatic on Railway)
 - [ ] Index optimization
 - [ ] Security: Strong password, limited user privileges
-- [ ] SSL connection (if required)
+- [ ] SSL connection (automatic on Railway)
+
+✅ **SEO & Marketing:**
+- [ ] Submit to Google Search Console
+- [ ] Submit sitemap.xml
+- [ ] Add Google Analytics
+- [ ] Set up social media links
+- [ ] Create content strategy
+
+### **Deployment Cost**
+
+**Free Tier (Perfect for Starting):**
+- Vercel: Free (100GB bandwidth/month)
+- Railway: Free ($5 credit/month, ~500 hours)
+- **Total: $0/month** 🎉
+
+**Paid Tier (When You Scale):**
+- Vercel Pro: $20/month
+- Railway Pro: $20/month  
+- Custom Domain: $10-15/year
+- **Total: ~$40-50/month**
+
+### **Quick Start Commands**
+
+```bash
+# 1. Build Frontend
+cd frontend
+npm run build
+
+# 2. Build Backend
+cd backend
+mvn clean package -DskipTests
+
+# 3. Deploy to Vercel (Frontend)
+npm install -g vercel
+vercel
+
+# 4. Deploy to Railway (Backend)
+# Use Railway dashboard - automatic deployment from GitHub
+```
+
+### **Post-Deployment URLs**
+
+After deployment, your website will be live at:
+- **Frontend**: `https://your-app.vercel.app`
+- **Backend API**: `https://your-app.railway.app/api`
+- **Admin Panel**: `https://your-app.vercel.app/admin`
+
+### **Monitoring & Analytics**
+
+- **Vercel Analytics**: Built-in, automatic
+- **Railway Logs**: Real-time backend logs
+- **Google Analytics**: Add tracking code
+- **Google Search Console**: Monitor SEO performance
 
 ---
 

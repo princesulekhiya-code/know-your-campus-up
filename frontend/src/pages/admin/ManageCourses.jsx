@@ -115,7 +115,7 @@ const ManageCourses = () => {
     const handleManageFees = (course) => {
         setSelectedCourse(course);
         resetFee({
-            academicYear: '2024-2025',
+            academicYear: '2026-27',
             tuitionFee: 0,
             hostelFee: 0,
             transportFee: 0,
@@ -154,7 +154,7 @@ const ManageCourses = () => {
     const handleManageSeats = (course) => {
         setSelectedCourse(course);
         resetSeat({
-            academicYear: '2024-2025',
+            academicYear: '2026-27',
             category: 'GENERAL',
             totalSeats: 0,
             availableSeats: 0
@@ -180,7 +180,7 @@ const ManageCourses = () => {
     const handleManageCutoffs = (course) => {
         setSelectedCourse(course);
         resetCutoff({
-            academicYear: '2024-2025',
+            academicYear: '2026-27',
             category: 'GENERAL',
             round: 'Round 1',
             cutoffPercentage: 0,
@@ -442,7 +442,7 @@ const ManageCourses = () => {
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                         Academic Year *
                                     </label>
-                                    <input type="text" {...registerFee('academicYear', { required: true })} className="input-field" placeholder="e.g., 2024-2025" />
+                                    <input type="text" {...registerFee('academicYear', { required: true })} className="input-field" placeholder="e.g., 2026-27" />
                                 </div>
 
                                 <div>
@@ -537,7 +537,7 @@ const ManageCourses = () => {
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     Academic Year *
                                 </label>
-                                <input type="text" {...registerSeat('academicYear', { required: true })} className="input-field" placeholder="e.g., 2024-2025" />
+                                <input type="text" {...registerSeat('academicYear', { required: true })} className="input-field" placeholder="e.g., 2026-27" />
                             </div>
 
                             <div>
@@ -599,7 +599,7 @@ const ManageCourses = () => {
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                         Academic Year *
                                     </label>
-                                    <input type="text" {...registerCutoff('academicYear', { required: true })} className="input-field" placeholder="e.g., 2024-2025" />
+                                    <input type="text" {...registerCutoff('academicYear', { required: true })} className="input-field" placeholder="e.g., 2026-27" />
                                 </div>
 
                                 <div>

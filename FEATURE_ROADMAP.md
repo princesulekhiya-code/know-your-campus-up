@@ -13,6 +13,12 @@
 - ✅ **Notification Management**
 - ✅ **Authentication & Authorization** (JWT-based)
 
+
+
+
+
+
+
 ### 2. Public Features
 - ✅ **College Listing** with filters
 - ✅ **College Details Page** with courses

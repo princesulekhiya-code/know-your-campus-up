@@ -96,7 +96,7 @@ VALUES (
 );
 
 -- ============================================
--- FEE STRUCTURE (Academic Year 2024-2025)
+-- FEE STRUCTURE (Academic Year 2026-27)
 -- ============================================
 
 -- Fee for B.Tech CSE (assuming course_id will be assigned sequentially)
@@ -108,7 +108,7 @@ VALUES (
 INSERT INTO fee_structure (course_id, academic_year, tuition_fee, hostel_fee, transport_fee, library_fee, lab_fee, other_fees, total_fee, fee_type, remarks, created_at, updated_at)
 SELECT 
     id,
-    '2024-2025',
+    '2026-27',
     95000.00,
     45000.00,
     12000.00,
@@ -127,7 +127,7 @@ WHERE college_id = 10 AND name = 'B.Tech' AND specialization = 'Computer Science
 INSERT INTO fee_structure (course_id, academic_year, tuition_fee, hostel_fee, transport_fee, library_fee, lab_fee, other_fees, total_fee, fee_type, remarks, created_at, updated_at)
 SELECT 
     id,
-    '2024-2025',
+    '2026-27',
     85000.00,
     45000.00,
     12000.00,
@@ -146,7 +146,7 @@ WHERE college_id = 10 AND name = 'B.Tech' AND specialization = 'Mechanical Engin
 INSERT INTO fee_structure (course_id, academic_year, tuition_fee, hostel_fee, transport_fee, library_fee, lab_fee, other_fees, total_fee, fee_type, remarks, created_at, updated_at)
 SELECT 
     id,
-    '2024-2025',
+    '2026-27',
     80000.00,
     45000.00,
     12000.00,
@@ -165,7 +165,7 @@ WHERE college_id = 10 AND name = 'B.Tech' AND specialization = 'Civil Engineerin
 INSERT INTO fee_structure (course_id, academic_year, tuition_fee, hostel_fee, transport_fee, library_fee, lab_fee, other_fees, total_fee, fee_type, remarks, created_at, updated_at)
 SELECT 
     id,
-    '2024-2025',
+    '2026-27',
     90000.00,
     45000.00,
     12000.00,
@@ -184,7 +184,7 @@ WHERE college_id = 10 AND name = 'B.Tech' AND specialization = 'Electronics & Co
 INSERT INTO fee_structure (course_id, academic_year, tuition_fee, hostel_fee, transport_fee, library_fee, lab_fee, other_fees, total_fee, fee_type, remarks, created_at, updated_at)
 SELECT 
     id,
-    '2024-2025',
+    '2026-27',
     85000.00,
     45000.00,
     12000.00,
@@ -203,7 +203,7 @@ WHERE college_id = 10 AND name = 'B.Tech' AND specialization = 'Electrical Engin
 INSERT INTO fee_structure (course_id, academic_year, tuition_fee, hostel_fee, transport_fee, library_fee, lab_fee, other_fees, total_fee, fee_type, remarks, created_at, updated_at)
 SELECT 
     id,
-    '2024-2025',
+    '2026-27',
     110000.00,
     50000.00,
     12000.00,
@@ -219,7 +219,7 @@ FROM courses
 WHERE college_id = 10 AND name = 'M.Tech' AND specialization = 'Computer Science & Engineering';
 
 -- ============================================
--- SEAT MATRIX (Academic Year 2024-2025)
+-- SEAT MATRIX (Academic Year 2026-27)
 -- ============================================
 
 -- B.Tech CSE - Seat Matrix by Category
@@ -229,7 +229,7 @@ SELECT
     'GENERAL',
     60,
     15,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -241,7 +241,7 @@ SELECT
     'OBC',
     40,
     12,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -253,7 +253,7 @@ SELECT
     'SC',
     20,
     8,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -265,7 +265,7 @@ SELECT
     'ST',
     10,
     5,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -278,7 +278,7 @@ SELECT
     'GENERAL',
     60,
     25,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -290,7 +290,7 @@ SELECT
     'OBC',
     40,
     18,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -302,7 +302,7 @@ SELECT
     'SC',
     20,
     10,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -315,7 +315,7 @@ SELECT
     'GENERAL',
     60,
     30,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -327,7 +327,7 @@ SELECT
     'OBC',
     40,
     20,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -340,7 +340,7 @@ SELECT
     'GENERAL',
     60,
     20,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -352,7 +352,7 @@ SELECT
     'OBC',
     40,
     15,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -365,7 +365,7 @@ SELECT
     'GENERAL',
     60,
     28,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -377,7 +377,7 @@ SELECT
     'OBC',
     40,
     18,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -390,7 +390,7 @@ SELECT
     'GENERAL',
     24,
     10,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 
@@ -402,7 +402,7 @@ SELECT
     'OBC',
     12,
     6,
-    '2024-2025',
+    '2026-27',
     NOW(),
     NOW()
 FROM courses 

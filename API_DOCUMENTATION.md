@@ -148,7 +148,7 @@ Response:
     "category": "GENERAL",
     "totalSeats": 50,
     "availableSeats": 10,
-    "academicYear": "2024-2025"
+    "academicYear": "2026-27"
   }
 ]
 ```
@@ -168,7 +168,7 @@ Response:
 [
   {
     "id": 1,
-    "academicYear": "2024-2025",
+    "academicYear": "2026-27",
     "tuitionFee": 200000,
     "hostelFee": 50000,
     "transportFee": 0,

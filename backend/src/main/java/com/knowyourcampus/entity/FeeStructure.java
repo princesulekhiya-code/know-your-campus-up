@@ -28,7 +28,7 @@ public class FeeStructure {
     private Course course;
 
     @Column(nullable = false)
-    private String academicYear; // 2024-2025
+    private String academicYear; // 2026-27
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal tuitionFee;

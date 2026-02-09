@@ -59,6 +59,8 @@
             <artifactId>jjwt-api</artifactId>
             <version>0.12.3</version>
         </dependency>
+
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
@@ -72,12 +74,17 @@
             <scope>runtime</scope>
         </dependency>
         
+
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+
+
+
         
         <!-- Dev Tools -->
         <dependency>
@@ -87,13 +94,21 @@
             <optional>true</optional>
         </dependency>
         
+
+
+
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
+
+
+  
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>

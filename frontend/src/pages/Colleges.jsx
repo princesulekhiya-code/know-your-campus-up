@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import FilterPanel from '../components/FilterPanel';
@@ -7,18 +7,15 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import collegeService from '../services/collegeService';
 import trackPageVisit from '../utils/tracking';
 
+
+
 const Colleges = () => {
     const [searchParams] = useSearchParams();
     const [colleges, setColleges] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({});
 
-    useEffect(() => {
-        trackPageVisit('/colleges', 'Colleges Listing');
-        loadColleges();
-    }, []);
-
-    const loadColleges = async (filterParams = {}) => {
+    const loadColleges = useCallback(async (filterParams = {}) => {
         setLoading(true);
         try {
             const response = await collegeService.getAll(filterParams);
@@ -28,9 +25,9 @@ const Colleges = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
-    const handleSearch = async (query) => {
+    const handleSearch = useCallback(async (query) => {
         setLoading(true);
         try {
             const response = await collegeService.search(query);
@@ -40,7 +37,7 @@ const Colleges = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters);
@@ -54,6 +51,37 @@ const Colleges = () => {
         setFilters({});
         loadColleges();
     };
+
+
+    useEffect(() => {
+        // Scroll to top smoothly when search params change
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        trackPageVisit('/colleges', 'Colleges Listing');
+
+        // Check if there's a search query in URL
+        const searchQuery = searchParams.get('search');
+        const typeFilter = searchParams.get('type');
+        const cityFilter = searchParams.get('city');
+        const stateFilter = searchParams.get('state');
+        const naacRating = searchParams.get('naacRating');
+
+        if (searchQuery) {
+            // If search query exists, perform search
+            handleSearch(searchQuery);
+        } else if (typeFilter || cityFilter || stateFilter || naacRating) {
+            // If filters exist, load with filters
+            const urlFilters = {};
+            if (typeFilter) urlFilters.type = typeFilter;
+            if (cityFilter) urlFilters.city = cityFilter;
+            if (stateFilter) urlFilters.state = stateFilter;
+            if (naacRating) urlFilters.naacRating = naacRating;
+            loadColleges(urlFilters);
+        } else {
+            // Otherwise load all colleges
+            loadColleges();
+        }
+    }, [searchParams, handleSearch, loadColleges]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">

@@ -1,0 +1,21 @@
+# robots.txt for Know Your Campus
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+Allow: /colleges
+Allow: /colleges/*
+Allow: /compare
+Allow: /admission
+Allow: /contact
+
+# Disallow admin and private pages
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /login
+
+# Sitemap location
+Sitemap: https://knowyourcampus.com/sitemap.xml
+
+# Crawl delay (optional, in seconds)
+Crawl-delay: 1
