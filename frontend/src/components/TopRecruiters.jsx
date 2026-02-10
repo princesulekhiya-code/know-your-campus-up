@@ -1,28 +1,28 @@
 import { motion } from 'framer-motion';
-import { FaGoogle, FaAmazon, FaMicrosoft, FaApple, FaUber, FaSpotify, FaSlack } from 'react-icons/fa';
-import { SiInfosys, SiTcs, SiAccenture, SiDell, SiIbm, SiIntel, SiOracle } from 'react-icons/si';
+import { FaBuilding, FaGraduationCap, FaLaptopCode, FaChartLine, FaBriefcase, FaUserTie } from 'react-icons/fa';
+import { MdEngineering, MdScience, MdBusiness, MdSchool, MdWork, MdTrendingUp } from 'react-icons/md';
 
 const TopRecruiters = () => {
     const recruiters = [
-        { name: "Google", icon: FaGoogle, color: "text-red-500" },
-        { name: "Microsoft", icon: FaMicrosoft, color: "text-blue-500" },
-        { name: "Amazon", icon: FaAmazon, color: "text-yellow-600" },
-        { name: "Infosys", icon: SiInfosys, color: "text-blue-600" },
-        { name: "TCS", icon: SiTcs, color: "text-black dark:text-white" },
-        { name: "Accenture", icon: SiAccenture, color: "text-purple-600" },
-        { name: "Apple", icon: FaApple, color: "text-gray-800 dark:text-white" },
-        { name: "Dell", icon: SiDell, color: "text-blue-700" },
-        { name: "IBM", icon: SiIbm, color: "text-blue-800" },
-        { name: "Intel", icon: SiIntel, color: "text-blue-500" },
-        { name: "Oracle", icon: SiOracle, color: "text-red-600" },
-        { name: "Uber", icon: FaUber, color: "text-black dark:text-white" }
+        { name: "IT Services", icon: FaLaptopCode, color: "text-blue-500" },
+        { name: "Engineering", icon: MdEngineering, color: "text-orange-500" },
+        { name: "Consulting", icon: FaUserTie, color: "text-purple-600" },
+        { name: "Technology", icon: FaBriefcase, color: "text-green-600" },
+        { name: "Research", icon: MdScience, color: "text-red-500" },
+        { name: "Business", icon: MdBusiness, color: "text-blue-700" },
+        { name: "Finance", icon: FaChartLine, color: "text-yellow-600" },
+        { name: "Education", icon: FaGraduationCap, color: "text-indigo-600" },
+        { name: "Analytics", icon: MdTrendingUp, color: "text-pink-600" },
+        { name: "Corporate", icon: FaBuilding, color: "text-gray-700 dark:text-gray-300" },
+        { name: "Management", icon: MdWork, color: "text-teal-600" },
+        { name: "Academia", icon: MdSchool, color: "text-cyan-600" }
     ];
 
     return (
         <section className="py-12 bg-white dark:bg-brand-900 border-b border-brand-100 dark:border-brand-800 overflow-hidden">
             <div className="container mx-auto px-4 mb-8 text-center">
                 <p className="text-sm font-bold text-brand-500 dark:text-brand-400 uppercase tracking-widest">
-                    Trusted by Top Companies
+                    Top Placement Sectors
                 </p>
             </div>
 
@@ -36,10 +36,10 @@ const TopRecruiters = () => {
                         ease: "linear",
                     }}
                 >
-                    {[...recruiters, ...recruiters, ...recruiters].map((company, index) => (
+                    {[...recruiters, ...recruiters, ...recruiters].map((sector, index) => (
                         <div key={index} className="flex items-center space-x-2 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0 cursor-pointer">
-                            <company.icon className={`text-4xl ${company.color}`} />
-                            <span className="text-xl font-bold text-gray-700 dark:text-gray-300 hidden md:block">{company.name}</span>
+                            <sector.icon className={`text-4xl ${sector.color}`} />
+                            <span className="text-xl font-bold text-gray-700 dark:text-gray-300 hidden md:block">{sector.name}</span>
                         </div>
                     ))}
                 </motion.div>
