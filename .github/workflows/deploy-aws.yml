@@ -75,6 +75,9 @@ jobs:
         # 2. Copy Backend JAR
         scp -o StrictHostKeyChecking=no -i private_key.pem backend/target/*.jar ${USER}@${HOST}:/home/${USER}/app.jar
         
+        # 2a. Copy Nginx Config
+        scp -o StrictHostKeyChecking=no -i private_key.pem nginx.conf ${USER}@${HOST}:/home/${USER}/nginx.conf
+
         # 3. Copy Frontend Build (dist folder)
         cd frontend/dist && tar -czf ../../frontend-build.tar.gz . && cd ../..
         scp -o StrictHostKeyChecking=no -i private_key.pem frontend-build.tar.gz ${USER}@${HOST}:/home/${USER}/frontend-build.tar.gz
@@ -120,6 +123,9 @@ jobs:
           sudo rm -rf /var/www/html/*
           tar -xzf /home/ubuntu/frontend-build.tar.gz -C /var/www/html
           rm /home/ubuntu/frontend-build.tar.gz
+          
+          # --- Nginx Setup ---
+          sudo mv /home/ubuntu/nginx.conf /etc/nginx/sites-available/default
           
           # Restart Nginx
           sudo systemctl reload nginx || true
