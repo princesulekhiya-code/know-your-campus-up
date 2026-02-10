@@ -51,8 +51,10 @@ public class College {
 
     private Boolean admissionOpen = true;
 
+    @Column(length = 2000)
     private String logoUrl;
 
+    @Column(length = 2000)
     private String bannerUrl;
 
     @Column(length = 3000)

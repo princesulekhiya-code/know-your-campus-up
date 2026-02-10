@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -1543,14 +1545,35 @@ public class DataSeeder implements CommandLineRunner {
         college.setAffiliatedTo(affiliatedTo);
         college.setFacilities("Library,Hostel,Sports Complex,Cafeteria,Labs,Wi-Fi,Auditorium");
 
-        // Auto-generate logo and banner image URLs
+        // Set real college images (verified Wikimedia Commons URLs)
+        Map<String, String> realImages = getCollegeImageMap();
+        String realImage = realImages.get(name);
+        if (realImage != null) {
+            college.setBannerUrl(realImage);
+        } else {
+            String seed = name.replaceAll("[^a-zA-Z0-9]", "-").toLowerCase();
+            college.setBannerUrl("https://picsum.photos/seed/" + seed + "/800/400");
+        }
         String initials = getInitials(name);
         String bgColor = "GOVERNMENT".equals(type) ? "1a56db" : "7c3aed";
-        String encodedName = name.replaceAll("[^a-zA-Z0-9 ]", "").replaceAll(" +", "+");
         college.setLogoUrl("https://ui-avatars.com/api/?name=" + initials + "&size=128&background=" + bgColor + "&color=fff&bold=true&font-size=0.4");
-        college.setBannerUrl("https://placehold.co/800x400/" + bgColor + "/white?text=" + encodedName);
 
         return collegeRepository.save(college);
+    }
+
+    private Map<String, String> getCollegeImageMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("Indian Institute of Technology Delhi", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/IIT_Delhi_Main_Building.jpeg/800px-IIT_Delhi_Main_Building.jpeg");
+        map.put("All India Institute of Medical Sciences Delhi", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/AIIMS_-New_Delhi%27s_Ward_Block.jpg/800px-AIIMS_-New_Delhi%27s_Ward_Block.jpg");
+        map.put("Shri Ram College of Commerce", "https://upload.wikimedia.org/wikipedia/commons/4/4c/Shriramcollegeofcommerce.JPG");
+        map.put("Amity University Noida", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Amity_University%2C_Campus_Noida.jpg/800px-Amity_University%2C_Campus_Noida.jpg");
+        map.put("Manipal Institute of Technology", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/MIT_Academic_Block_1_-_Quadrangle.jpg/800px-MIT_Academic_Block_1_-_Quadrangle.jpg");
+        map.put("National Institute of Technology Tiruchirappalli", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/National_Institute_of_Technology%2C_Trichy.jpg/800px-National_Institute_of_Technology%2C_Trichy.jpg");
+        map.put("Indian Institute of Management Ahmedabad", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Iima_new_campus_panorama.jpg/800px-Iima_new_campus_panorama.jpg");
+        map.put("Jadavpur University", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Jadavpur_University_Gate_No._4.jpg/800px-Jadavpur_University_Gate_No._4.jpg");
+        map.put("Lovely Professional University", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Lovely_Professional_University_%28LPU%29%2C_Jalandhar-Phagwara_Highway%2C_Jalandhar.jpg/800px-Lovely_Professional_University_%28LPU%29%2C_Jalandhar-Phagwara_Highway%2C_Jalandhar.jpg");
+        map.put("Sam Global University", "https://www.shikshahub.com/uploads/blogs/SAM%20Global%20University.jpg");
+        return map;
     }
 
     private String getInitials(String name) {

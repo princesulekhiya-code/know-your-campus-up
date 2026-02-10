@@ -19,14 +19,14 @@ const CollegeCard = ({ college }) => {
                                 src={college.bannerUrl}
                                 alt={college.name}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                             />
-                        ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                                <span className="text-white text-4xl font-bold opacity-20">
-                                    {college.name.charAt(0)}
-                                </span>
-                            </div>
-                        )}
+                        ) : null}
+                        <div className="w-full h-full flex items-center justify-center" style={{ display: college.bannerUrl ? 'none' : 'flex' }}>
+                            <span className="text-white text-4xl font-bold opacity-20">
+                                {college.name.charAt(0)}
+                            </span>
+                        </div>
                         {college.admissionOpen && (
                             <motion.div
                                 initial={{ scale: 0 }}

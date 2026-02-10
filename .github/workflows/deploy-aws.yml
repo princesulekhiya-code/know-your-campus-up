@@ -1,0 +1,96 @@
+name: Deploy to AWS EC2 (Full Stack)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    name: Deploy Full Stack to EC2
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    # ----------------------------------------------------------------
+    # 1. BUILD BACKEND
+    # ----------------------------------------------------------------
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: Build Backend
+      run: |
+        cd backend
+        mvn clean package -DskipTests
+
+    # ----------------------------------------------------------------
+    # 2. BUILD FRONTEND
+    # ----------------------------------------------------------------
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install Frontend Dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Build Frontend
+      env:
+        # EC2 Public IP will be used here
+        VITE_API_URL: '/api'
+      run: |
+        cd frontend
+        npm run build
+
+    # ----------------------------------------------------------------
+    # 3. DEPLOY TO EC2
+    # ----------------------------------------------------------------
+    - name: Deploy to EC2
+      env:
+        PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+        HOST: ${{ secrets.EC2_HOST }}
+        USER: ${{ secrets.EC2_USER }}
+      run: |
+        echo "$PRIVATE_KEY" > private_key.pem
+        chmod 600 private_key.pem
+        
+        # 1. Create directory structure
+        ssh -o StrictHostKeyChecking=no -i private_key.pem ${USER}@${HOST} 'sudo mkdir -p /var/www/html && sudo mkdir -p /opt/knowyourcampus && sudo chown -R ubuntu:ubuntu /var/www/html /opt/knowyourcampus'
+        
+        # 2. Copy Backend JAR
+        scp -o StrictHostKeyChecking=no -i private_key.pem backend/target/*.jar ${USER}@${HOST}:/home/${USER}/app.jar
+        
+        # 3. Copy Frontend Build (dist folder)
+        # Zip it first for faster transfer
+        cd frontend/dist && tar -czf ../../frontend-build.tar.gz . && cd ../..
+        scp -o StrictHostKeyChecking=no -i private_key.pem frontend-build.tar.gz ${USER}@${HOST}:/home/${USER}/frontend-build.tar.gz
+        
+        # 4. Execute Remote Commands
+        ssh -o StrictHostKeyChecking=no -i private_key.pem ${USER}@${HOST} << 'EOF'
+          # --- Backend Setup ---
+          sudo systemctl stop knowyourcampus || true
+          mv /home/ubuntu/app.jar /opt/knowyourcampus/app.jar
+          sudo systemctl start knowyourcampus
+          
+          # --- Frontend Setup ---
+          # Extract to Nginx web root
+          sudo rm -rf /var/www/html/*
+          tar -xzf /home/ubuntu/frontend-build.tar.gz -C /var/www/html
+          rm /home/ubuntu/frontend-build.tar.gz
+          
+          # Restart Nginx to apply changes
+          sudo systemctl reload nginx || true
+        EOF
+        
+        rm -f private_key.pem

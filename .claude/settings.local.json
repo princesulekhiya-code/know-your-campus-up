@@ -4,7 +4,9 @@
       "Bash(mysql:*)",
       "Bash(findstr:*)",
       "Read(//d/**)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:www.shikshahub.com)"
     ]
   }
 }
