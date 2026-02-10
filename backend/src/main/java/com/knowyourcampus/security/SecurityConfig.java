@@ -67,6 +67,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/tracking/**", "/tracking/**").permitAll()
                         .requestMatchers("/api/notifications/active", "/notifications/active").permitAll()
                         .requestMatchers("/api/reviews/college/**", "/reviews/college/**").permitAll()
+                        .requestMatchers("/api/actuator/**", "/actuator/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
@@ -79,7 +80,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
-                Arrays.asList("http://localhost:5173", "http://localhost:5174", "http://localhost:3000"));
+                Arrays.asList("http://localhost:5173", "http://localhost:5174", "http://localhost:3000",
+                        "https://knowyourcampus.in", "https://www.knowyourcampus.in"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
