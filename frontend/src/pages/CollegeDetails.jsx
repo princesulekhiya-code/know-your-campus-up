@@ -21,19 +21,31 @@ const CollegeDetails = () => {
     useEffect(() => {
         const loadCollegeDetails = async () => {
             try {
-                const [collegeRes, coursesRes, reviewStatsRes] = await Promise.all([
-                    collegeService.getById(id),
-                    courseService.getByCollegeId(id),
-                    reviewService.getCollegeStats(id),
-                ]);
-
+                // Load college details (required)
+                const collegeRes = await collegeService.getById(id);
                 setCollege(collegeRes.data);
-                setCourses(coursesRes.data);
-                setReviewStats(reviewStatsRes.data);
-
                 trackPageVisit(`/colleges/${id}`, collegeRes.data.name, parseInt(id));
+
+                // Load courses (optional)
+                try {
+                    const coursesRes = await courseService.getByCollegeId(id);
+                    setCourses(coursesRes.data || []);
+                } catch (error) {
+                    console.error('Failed to load courses:', error);
+                    setCourses([]);
+                }
+
+                // Load review stats (optional)
+                try {
+                    const reviewStatsRes = await reviewService.getCollegeStats(id);
+                    setReviewStats(reviewStatsRes.data);
+                } catch (error) {
+                    console.error('Failed to load review stats:', error);
+                    setReviewStats({ averageRating: 0, totalReviews: 0 });
+                }
             } catch (error) {
                 console.error('Failed to load college details:', error);
+                setCollege(null);
             } finally {
                 setLoading(false);
             }
