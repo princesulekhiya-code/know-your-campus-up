@@ -11,7 +11,7 @@ const BlogPreview = () => {
             category: "Admissions",
             date: "Feb 11, 2026",
             readTime: "7 min read",
-            image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1607237138185-efd9571f1680?w=800&q=80",
             trending: true
         },
         {
@@ -21,7 +21,7 @@ const BlogPreview = () => {
             category: "Rankings",
             date: "Feb 10, 2026",
             readTime: "6 min read",
-            image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80",
             trending: true
         },
         {
@@ -31,7 +31,7 @@ const BlogPreview = () => {
             category: "Guides",
             date: "Feb 9, 2026",
             readTime: "5 min read",
-            image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80",
             trending: false
         },
         {
@@ -41,7 +41,7 @@ const BlogPreview = () => {
             category: "Exams",
             date: "Feb 8, 2026",
             readTime: "8 min read",
-            image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
             trending: false
         },
         {
@@ -51,7 +51,7 @@ const BlogPreview = () => {
             category: "Scholarships",
             date: "Feb 7, 2026",
             readTime: "6 min read",
-            image: "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1523240635617-3a0401d67060?w=800&q=80",
             trending: false
         },
         {
@@ -61,7 +61,7 @@ const BlogPreview = () => {
             category: "Placements",
             date: "Feb 6, 2026",
             readTime: "7 min read",
-            image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80",
             trending: true
         }
     ];
