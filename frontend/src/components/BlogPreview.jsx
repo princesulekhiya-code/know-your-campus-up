@@ -6,32 +6,62 @@ const BlogPreview = () => {
     const blogPosts = [
         {
             id: 1,
-            title: "Top 10 Engineering Colleges in India 2024",
-            excerpt: "Discover the best engineering colleges with highest placements, world-class faculty, and cutting-edge infrastructure...",
-            category: "Rankings",
-            date: "Jan 3, 2024",
-            readTime: "5 min read",
+            title: "College Admissions 2024: Complete Guide & Important Dates",
+            excerpt: "Everything you need to know about college admissions for 2024 including application deadlines, entrance exams, and admission process...",
+            category: "Admissions",
+            date: "Feb 10, 2026",
+            readTime: "7 min read",
             image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=250&fit=crop",
             trending: true
         },
         {
             id: 2,
-            title: "JEE Main 2024: Important Dates & Preparation Tips",
-            excerpt: "Complete guide to JEE Main 2024 including exam dates, syllabus, preparation strategy, and expert tips...",
+            title: "Top Engineering Colleges in Madhya Pradesh 2024",
+            excerpt: "Comprehensive list of best engineering colleges in MP including SIRT Bhopal, IIT Indore, NIT Bhopal with fees, placements, and cutoffs...",
+            category: "Rankings",
+            date: "Feb 9, 2026",
+            readTime: "6 min read",
+            image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=250&fit=crop",
+            trending: true
+        },
+        {
+            id: 3,
+            title: "How to Choose the Right College: Expert Tips",
+            excerpt: "Learn how to evaluate colleges based on placements, faculty, infrastructure, fees, and location. Make an informed decision for your future...",
+            category: "Guides",
+            date: "Feb 8, 2026",
+            readTime: "5 min read",
+            image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
+            trending: false
+        },
+        {
+            id: 4,
+            title: "JEE Main 2024: Preparation Strategy & Tips",
+            excerpt: "Complete preparation guide for JEE Main including study plan, important topics, mock tests, and time management strategies...",
             category: "Exams",
-            date: "Jan 2, 2024",
+            date: "Feb 7, 2026",
             readTime: "8 min read",
             image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop",
             trending: false
         },
         {
-            id: 3,
-            title: "Scholarship Opportunities for Engineering Students",
-            excerpt: "Explore various scholarship programs available for engineering students including government and private scholarships...",
+            id: 5,
+            title: "Scholarship Opportunities for Students 2024",
+            excerpt: "Explore government and private scholarships for engineering, medical, and MBA students. Learn eligibility criteria and application process...",
             category: "Scholarships",
-            date: "Dec 30, 2023",
+            date: "Feb 6, 2026",
             readTime: "6 min read",
-            image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=250&fit=crop",
+            image: "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=400&h=250&fit=crop",
+            trending: false
+        },
+        {
+            id: 6,
+            title: "Campus Placement Trends 2024: What to Expect",
+            excerpt: "Analysis of latest campus placement trends, top recruiting sectors, average packages, and career opportunities for graduates...",
+            category: "Placements",
+            date: "Feb 5, 2026",
+            readTime: "7 min read",
+            image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=250&fit=crop",
             trending: true
         }
     ];
