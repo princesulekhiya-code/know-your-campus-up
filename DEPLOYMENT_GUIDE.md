@@ -1,234 +1,458 @@
-# Complete Deployment Guide - Know Your Campus
+# Know Your Campus - AWS Deployment Guide
 
-## 🎯 Overview
+## 🚀 Complete Deployment Documentation
 
-This guide will help you deploy:
-1. **Frontend (React + Vite)** → Vercel (Free)
-2. **Backend (Spring Boot)** → Railway (Free tier)
-3. **Database (MySQL)** → Railway (Free tier)
+This guide documents the complete deployment process of the Know Your Campus application on AWS EC2 with RDS MySQL database.
 
 ---
 
-## 📦 Part 1: Backend Deployment (Railway)
+## 📋 Table of Contents
 
-### Step 1.1: Prepare Backend for Production
-
-1. **Update application.properties for production**
-   - File: `backend/src/main/resources/application.properties`
-   - Add production profile
-
-2. **Create Dockerfile for Backend**
-   ```dockerfile
-   FROM openjdk:21-jdk-slim
-   WORKDIR /app
-   COPY target/*.jar app.jar
-   EXPOSE 8081
-   ENTRYPOINT ["java", "-jar", "app.jar"]
-   ```
-
-### Step 1.2: Deploy to Railway
-
-1. **Sign up**: Go to https://railway.app
-2. **Create New Project** → Deploy from GitHub
-3. **Connect Repository**: Link your GitHub repo
-4. **Add MySQL Database**:
-   - Click "New" → Database → MySQL
-   - Railway will provide connection details
-5. **Configure Environment Variables**:
-   ```
-   SPRING_DATASOURCE_URL=jdbc:mysql://[railway-mysql-host]:3306/railway
-   SPRING_DATASOURCE_USERNAME=[from railway]
-   SPRING_DATASOURCE_PASSWORD=[from railway]
-   JWT_SECRET=YourSecretKeyHere
-   ```
-6. **Deploy**: Railway will auto-deploy
-7. **Get Backend URL**: e.g., `https://your-app.railway.app`
+1. [Infrastructure Setup](#infrastructure-setup)
+2. [Backend Deployment](#backend-deployment)
+3. [Frontend Deployment](#frontend-deployment)
+4. [Database Configuration](#database-configuration)
+5. [CI/CD Pipeline](#cicd-pipeline)
+6. [Domain Configuration](#domain-configuration)
+7. [Troubleshooting](#troubleshooting)
 
 ---
 
-## 🌐 Part 2: Frontend Deployment (Vercel)
+## 🏗️ Infrastructure Setup
 
-### Step 2.1: Update API Base URL
+### AWS Resources Created
 
-Update `frontend/src/services/api.js`:
-```javascript
-const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '/api',
-    // ...
-});
+#### 1. EC2 Instance
+- **Instance Type**: t2.micro (Free Tier)
+- **AMI**: Ubuntu 24.04 LTS
+- **Region**: ap-south-1 (Mumbai)
+- **Public IP**: 43.205.141.253
+- **Storage**: 8GB gp3
+
+#### 2. RDS MySQL Database
+- **Engine**: MySQL 8.0.45
+- **Instance Class**: db.t3.micro
+- **Storage**: 20GB gp3
+- **Endpoint**: `database-knowyourcampus.c14cm62c24f5.ap-south-1.rds.amazonaws.com`
+- **Port**: 3306
+- **Database Name**: knowyourcampus
+
+#### 3. Security Groups
+
+**EC2 Security Group:**
+```
+Inbound Rules:
+- SSH (22): Your IP
+- HTTP (80): 0.0.0.0/0
+- HTTPS (443): 0.0.0.0/0
+- Custom TCP (8080): EC2 Security Group (for backend)
+
+Outbound Rules:
+- All traffic: 0.0.0.0/0
 ```
 
-Create `.env.production`:
+**RDS Security Group:**
 ```
-VITE_API_URL=https://your-backend.railway.app/api
+Inbound Rules:
+- MySQL (3306): EC2 Security Group
+
+Outbound Rules:
+- All traffic: 0.0.0.0/0
 ```
 
-### Step 2.2: Deploy to Vercel
+---
 
-**Option A: Using Vercel CLI**
+## 🔧 Backend Deployment
+
+### Server Setup
+
+#### 1. Install Java 21
 ```bash
-cd frontend
-npm install -g vercel
-vercel login
-vercel
+sudo apt update
+sudo apt install -y openjdk-21-jdk
+java -version
 ```
 
-**Option B: Using Vercel Dashboard**
-1. Go to https://vercel.com
-2. Sign up with GitHub
-3. Click "New Project"
-4. Import your GitHub repository
-5. Configure:
-   - **Framework Preset**: Vite
-   - **Root Directory**: frontend
-   - **Build Command**: npm run build
-   - **Output Directory**: dist
-6. Add Environment Variables:
-   - `VITE_API_URL` = Your Railway backend URL
-7. Click "Deploy"
+#### 2. Create Application Directory
+```bash
+sudo mkdir -p /opt/knowyourcampus
+sudo chown ubuntu:ubuntu /opt/knowyourcampus
+```
+
+#### 3. Environment Configuration
+Create `/opt/knowyourcampus/.env`:
+```env
+DB_HOST=database-knowyourcampus.c14cm62c24f5.ap-south-1.rds.amazonaws.com
+DB_NAME=knowyourcampus
+DB_USERNAME=admin
+DB_PASSWORD=prince123prince
+JWT_SECRET=my-very-sooper-secret-key-that-is-very-long-and-secure
+CORS_ORIGINS=*
+SERVER_SERVLET_CONTEXT_PATH=/api
+MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE=health,info,metrics,mappings
+```
+
+#### 4. Systemd Service Configuration
+Create `/etc/systemd/system/knowyourcampus.service`:
+```ini
+[Unit]
+Description=Know Your Campus Backend
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/knowyourcampus
+EnvironmentFile=/opt/knowyourcampus/.env
+ExecStart=/usr/bin/java -jar /opt/knowyourcampus/app.jar --spring.profiles.active=prod
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### 5. Enable and Start Service
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable knowyourcampus
+sudo systemctl start knowyourcampus
+sudo systemctl status knowyourcampus
+```
+
+### Application Configuration
+
+#### application-prod.properties
+```properties
+# Server Configuration
+server.port=8080
+server.servlet.context-path=/api
+
+# Database Configuration
+spring.datasource.url=jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?useSSL=true&requireSSL=false
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+
+# JWT Configuration
+jwt.secret=${JWT_SECRET}
+jwt.expiration=86400000
+
+# CORS Configuration
+cors.allowed.origins=${CORS_ORIGINS}
+```
 
 ---
 
-## 🔧 Part 3: Configuration Updates
+## 🎨 Frontend Deployment
 
-### 3.1: Update CORS in Backend
+### Nginx Setup
 
-File: `backend/src/main/java/com/knowyourcampus/security/SecurityConfig.java`
+#### 1. Install Nginx
+```bash
+sudo apt install -y nginx
+```
 
-Add your Vercel domain to CORS:
-```java
-@Bean
-public CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList(
-        "http://localhost:5173",
-        "https://your-app.vercel.app"  // Add this
-    ));
-    // ...
+#### 2. Configure Nginx
+Create `/etc/nginx/sites-available/default`:
+```nginx
+server {
+    listen 80;
+    server_name _;  # Will be updated to knowyourcampus.in
+
+    # Frontend: Serve React Static Files
+    location / {
+        root /var/www/html;
+        index index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Backend: Proxy API Requests to Spring Boot
+    location /api {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    # Optional: Serve Uploaded Images
+    location /uploads {
+        alias /opt/knowyourcampus/uploads;
+    }
 }
 ```
 
-### 3.2: Update Canonical URLs
+#### 3. Deploy Frontend
+```bash
+# Frontend files are deployed to /var/www/html via GitHub Actions
+sudo chown -R www-data:www-data /var/www/html
+sudo chmod -R 755 /var/www/html
+```
 
-File: `frontend/index.html`
-
-Replace `https://knowyourcampus.com/` with your actual Vercel URL.
-
----
-
-## 🗄️ Part 4: Database Migration
-
-### Option A: Use Railway MySQL (Recommended)
-- Railway provides free MySQL
-- Auto-configured connection
-- Automatic backups
-
-### Option B: Use External MySQL
-- **PlanetScale** (Free tier)
-- **AWS RDS** (Paid)
-- **DigitalOcean** (Paid)
+#### 4. Restart Nginx
+```bash
+sudo systemctl restart nginx
+sudo systemctl status nginx
+```
 
 ---
 
-## 🚀 Part 5: Post-Deployment
+## 🗄️ Database Configuration
 
-### 5.1: Test Your Deployment
-1. Visit your Vercel URL
-2. Test search functionality
-3. Test college listings
-4. Test admin login
-5. Check console for errors
+### Initial Setup
 
-### 5.2: Submit to Google
-1. **Google Search Console**: https://search.google.com/search-console
-2. Add your Vercel domain
-3. Submit sitemap: `https://your-app.vercel.app/sitemap.xml`
+#### 1. Create Database
+```bash
+mysql -h database-knowyourcampus.c14cm62c24f5.ap-south-1.rds.amazonaws.com \
+  -u admin -pprince123prince \
+  -e "CREATE DATABASE IF NOT EXISTS knowyourcampus;"
+```
 
-### 5.3: Monitor
-- **Vercel Analytics**: Built-in
-- **Railway Logs**: Check backend logs
-- **Google Analytics**: Add tracking code
+#### 2. Verify Connection
+```bash
+mysql -h database-knowyourcampus.c14cm62c24f5.ap-south-1.rds.amazonaws.com \
+  -u admin -pprince123prince \
+  -e "SHOW DATABASES;"
+```
 
----
+### Data Seeding
 
-## 💰 Cost Breakdown
-
-### Free Tier (Recommended for Starting)
-- **Vercel**: Free (Hobby plan)
-  - Unlimited deployments
-  - 100GB bandwidth/month
-  - Automatic HTTPS
-  
-- **Railway**: Free ($5 credit/month)
-  - Backend + MySQL
-  - 500 hours/month
-  - 1GB RAM
-
-### Paid Options (When You Grow)
-- **Vercel Pro**: $20/month
-- **Railway Pro**: $20/month
-- **Custom Domain**: $10-15/year
+The application automatically seeds:
+- **Admin Users**: 
+  - `admin@knowyourcampus.com` / `Admin@123`
+  - `princesulekhiya@gmail.com` / `Pince@123`
+- **Sample Colleges**: 10 top colleges (IITs, NITs, Private)
 
 ---
 
-## 🔐 Security Checklist
+## 🔄 CI/CD Pipeline
 
-- [ ] Change JWT secret in production
-- [ ] Update database password
-- [ ] Enable HTTPS (auto on Vercel/Railway)
-- [ ] Add rate limiting
-- [ ] Configure CORS properly
-- [ ] Remove console.logs from production
-- [ ] Enable security headers
+### GitHub Actions Workflow
+
+File: `.github/workflows/deploy-aws.yml`
+
+**Triggers:**
+- Push to `main` branch
+- Manual workflow dispatch
+
+**Steps:**
+1. **Build Backend**
+   - Maven clean package
+   - Skip tests for faster deployment
+
+2. **Build Frontend**
+   - npm install
+   - npm run build
+   - Create tarball of dist folder
+
+3. **Deploy to EC2**
+   - Copy JAR to `/opt/knowyourcampus/app.jar`
+   - Copy frontend build to `/var/www/html`
+   - Copy nginx config
+   - Restart services
+
+**Secrets Required:**
+- `EC2_HOST`: 43.205.141.253
+- `EC2_USER`: ubuntu
+- `EC2_SSH_KEY`: Private key content
+
+---
+
+## 🌐 Domain Configuration
+
+### Domain: knowyourcampus.in
+
+#### Step 1: DNS Configuration
+
+Add these DNS records in your domain provider:
+
+```
+Type: A
+Name: @
+Value: 43.205.141.253
+TTL: 3600
+
+Type: A
+Name: www
+Value: 43.205.141.253
+TTL: 3600
+```
+
+#### Step 2: Update Nginx Configuration
+
+```nginx
+server {
+    listen 80;
+    server_name knowyourcampus.in www.knowyourcampus.in;
+    
+    # ... rest of configuration
+}
+```
+
+#### Step 3: Install SSL Certificate (Let's Encrypt)
+
+```bash
+# Install Certbot
+sudo apt install -y certbot python3-certbot-nginx
+
+# Obtain SSL Certificate
+sudo certbot --nginx -d knowyourcampus.in -d www.knowyourcampus.in
+
+# Auto-renewal is configured automatically
+sudo certbot renew --dry-run
+```
+
+After SSL installation, Nginx will automatically redirect HTTP to HTTPS.
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Frontend not connecting to Backend?
-- Check CORS settings
-- Verify API URL in .env.production
-- Check browser console for errors
+### Common Issues and Solutions
 
-### Backend not starting?
-- Check Railway logs
-- Verify database connection
-- Check environment variables
+#### 1. Backend Not Starting
+```bash
+# Check logs
+sudo journalctl -u knowyourcampus.service -n 50 --no-pager
 
-### Database connection failed?
-- Verify credentials
-- Check if Railway MySQL is running
-- Test connection string
+# Check if port 8080 is in use
+sudo netstat -tulpn | grep 8080
+
+# Restart service
+sudo systemctl restart knowyourcampus
+```
+
+#### 2. Database Connection Failed
+```bash
+# Test connection from EC2
+mysql -h database-knowyourcampus.c14cm62c24f5.ap-south-1.rds.amazonaws.com \
+  -u admin -pprince123prince
+
+# Check security group rules
+# Ensure EC2 security group is allowed in RDS security group
+```
+
+#### 3. 404 Errors on API Calls
+```bash
+# Verify context path
+curl http://localhost:8080/api/colleges
+
+# Check Nginx proxy configuration
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+#### 4. LazyInitializationException
+**Solution**: Add `@JsonIgnore` to lazy-loaded collections in entities.
+
+```java
+@OneToMany(mappedBy = "college")
+@JsonIgnore
+private List<Course> courses;
+```
+
+#### 5. Frontend Not Loading
+```bash
+# Check Nginx status
+sudo systemctl status nginx
+
+# Verify files exist
+ls -la /var/www/html
+
+# Check Nginx error logs
+sudo tail -f /var/log/nginx/error.log
+```
 
 ---
 
-## 📞 Support Resources
+## 📊 Monitoring and Logs
 
-- **Vercel Docs**: https://vercel.com/docs
-- **Railway Docs**: https://docs.railway.app
-- **Vite Deployment**: https://vitejs.dev/guide/static-deploy.html
-- **Spring Boot Deployment**: https://spring.io/guides/gs/spring-boot-docker/
+### Application Logs
+```bash
+# View real-time logs
+sudo journalctl -u knowyourcampus.service -f
+
+# View last 100 lines
+sudo journalctl -u knowyourcampus.service -n 100 --no-pager
+```
+
+### Nginx Logs
+```bash
+# Access logs
+sudo tail -f /var/log/nginx/access.log
+
+# Error logs
+sudo tail -f /var/log/nginx/error.log
+```
+
+### Database Logs
+```bash
+# Connect to database
+mysql -h database-knowyourcampus.c14cm62c24f5.ap-south-1.rds.amazonaws.com \
+  -u admin -pprince123prince knowyourcampus
+
+# Check tables
+SHOW TABLES;
+
+# Check data
+SELECT COUNT(*) FROM colleges;
+SELECT email, role FROM admin_users;
+```
 
 ---
 
-## 🎉 Success Checklist
+## 🔐 Security Best Practices
 
-After deployment, verify:
-- [ ] Frontend loads on Vercel URL
-- [ ] Backend API responds
-- [ ] Database connected
-- [ ] Search works
-- [ ] College listings load
-- [ ] Images display
-- [ ] Forms submit
-- [ ] Admin panel accessible
-- [ ] Mobile responsive
-- [ ] HTTPS enabled
+1. **SSH Access**: Use key-based authentication only
+2. **Database**: Use strong passwords, restrict access to EC2 security group
+3. **Environment Variables**: Never commit `.env` files to Git
+4. **SSL Certificate**: Always use HTTPS in production
+5. **Firewall**: Restrict SSH access to specific IPs
+6. **Regular Updates**: Keep system packages updated
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
 
 ---
 
-**Your website will be live at:**
-- Frontend: `https://your-app.vercel.app`
-- Backend: `https://your-app.railway.app`
+## 📞 Support
 
-**Ready to deploy? Let's start!** 🚀
+**Admin Credentials:**
+- Email: princesulekhiya@gmail.com
+- Password: Pince@123
+
+**Live Application:**
+- Current: http://43.205.141.253
+- Domain: https://knowyourcampus.in (after DNS propagation)
+
+**GitHub Repository:**
+- https://github.com/princesulekhiya-code/know-your-campus-up
+
+---
+
+## ✅ Deployment Checklist
+
+- [x] EC2 instance created and configured
+- [x] RDS MySQL database created
+- [x] Security groups configured
+- [x] Java 21 installed
+- [x] Backend deployed and running
+- [x] Frontend deployed to Nginx
+- [x] Database seeded with sample data
+- [x] Admin users created
+- [x] GitHub Actions CI/CD configured
+- [ ] Domain DNS configured (knowyourcampus.in)
+- [ ] SSL certificate installed
+- [ ] Production testing completed
+
+---
+
+**Last Updated**: February 10, 2026
+**Deployed By**: Prince Sulekhiya
+**Status**: ✅ Production Ready
