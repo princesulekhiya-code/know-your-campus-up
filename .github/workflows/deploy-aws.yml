@@ -61,6 +61,10 @@ jobs:
         PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
         HOST: ${{ secrets.EC2_HOST }}
         USER: ${{ secrets.EC2_USER }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
       run: |
         echo "$PRIVATE_KEY" > private_key.pem
         chmod 600 private_key.pem
@@ -72,25 +76,54 @@ jobs:
         scp -o StrictHostKeyChecking=no -i private_key.pem backend/target/*.jar ${USER}@${HOST}:/home/${USER}/app.jar
         
         # 3. Copy Frontend Build (dist folder)
-        # Zip it first for faster transfer
         cd frontend/dist && tar -czf ../../frontend-build.tar.gz . && cd ../..
         scp -o StrictHostKeyChecking=no -i private_key.pem frontend-build.tar.gz ${USER}@${HOST}:/home/${USER}/frontend-build.tar.gz
         
-        # 4. Execute Remote Commands
-        ssh -o StrictHostKeyChecking=no -i private_key.pem ${USER}@${HOST} << 'EOF'
+        # 4. Generate .env file locally to avoid escaping issues, then upload
+        echo "DB_HOST=$DB_HOST" > .env.prod
+        echo "DB_NAME=knowyourcampus" >> .env.prod
+        echo "DB_USERNAME=$DB_USERNAME" >> .env.prod
+        echo "DB_PASSWORD=$DB_PASSWORD" >> .env.prod
+        echo "JWT_SECRET=$JWT_SECRET" >> .env.prod
+        echo "CORS_ORIGINS=*" >> .env.prod
+        
+        scp -o StrictHostKeyChecking=no -i private_key.pem .env.prod ${USER}@${HOST}:/opt/knowyourcampus/.env
+        
+        # 5. Connect and Configure Service
+        ssh -o StrictHostKeyChecking=no -i private_key.pem ${USER}@${HOST} "
           # --- Backend Setup ---
           sudo systemctl stop knowyourcampus || true
           mv /home/ubuntu/app.jar /opt/knowyourcampus/app.jar
+          
+          # Create Service File with EnvironmentFile directive
+          sudo bash -c 'cat > /etc/systemd/system/knowyourcampus.service <<EOF
+[Unit]
+Description=Know Your Campus Backend
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/knowyourcampus
+EnvironmentFile=/opt/knowyourcampus/.env
+ExecStart=/usr/bin/java -jar /opt/knowyourcampus/app.jar --spring.profiles.active=prod
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+          
+          sudo systemctl daemon-reload
           sudo systemctl start knowyourcampus
           
           # --- Frontend Setup ---
-          # Extract to Nginx web root
           sudo rm -rf /var/www/html/*
           tar -xzf /home/ubuntu/frontend-build.tar.gz -C /var/www/html
           rm /home/ubuntu/frontend-build.tar.gz
           
-          # Restart Nginx to apply changes
+          # Restart Nginx
           sudo systemctl reload nginx || true
-        EOF
+        "
         
-        rm -f private_key.pem
+        rm -f private_key.pem .env.prod
