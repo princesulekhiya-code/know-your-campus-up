@@ -241,9 +241,10 @@ const CollegeDetails = () => {
                             <p className="mb-4 opacity-90">Talk to our counsellors</p>
                             <a
                                 href="tel:9009536046"
-                                className="inline-block w-full text-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-200"
+                                className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-white text-primary-700 font-bold text-lg rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg transition-all duration-200"
                             >
-                                📞 Call 9009536046
+                                <FiPhone className="w-6 h-6" />
+                                <span>Call 9009536046</span>
                             </a>
                         </div>
                     </div>
