@@ -1,6 +1,7 @@
 package com.knowyourcampus.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;\r\nimport jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
