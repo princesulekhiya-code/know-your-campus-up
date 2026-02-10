@@ -96,23 +96,22 @@ jobs:
           mv /home/ubuntu/app.jar /opt/knowyourcampus/app.jar
           
           # Create Service File with EnvironmentFile directive
-          sudo bash -c 'cat > /etc/systemd/system/knowyourcampus.service <<EOF
-[Unit]
-Description=Know Your Campus Backend
-After=network.target
-
-[Service]
-Type=simple
-User=ubuntu
-WorkingDirectory=/opt/knowyourcampus
-EnvironmentFile=/opt/knowyourcampus/.env
-ExecStart=/usr/bin/java -jar /opt/knowyourcampus/app.jar --spring.profiles.active=prod
-Restart=on-failure
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-EOF'
+          # Using echo to avoid YAML parsing issues with heredoc
+          echo "[Unit]" | sudo tee /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "Description=Know Your Campus Backend" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "After=network.target" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "[Service]" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "Type=simple" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "User=ubuntu" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "WorkingDirectory=/opt/knowyourcampus" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "EnvironmentFile=/opt/knowyourcampus/.env" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "ExecStart=/usr/bin/java -jar /opt/knowyourcampus/app.jar --spring.profiles.active=prod" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "Restart=on-failure" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "RestartSec=10" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "[Install]" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
+          echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/knowyourcampus.service > /dev/null
           
           sudo systemctl daemon-reload
           sudo systemctl start knowyourcampus
