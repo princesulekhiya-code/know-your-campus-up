@@ -56,26 +56,34 @@ public class DataSeeder implements CommandLineRunner {
                 }
 
                 // Seed Prince Sulekhiya as Admin (User Request)
-                if (!adminUserRepository.existsByEmail("princesulekhiya@gmail.com")) {
-                        AdminUser prince = new AdminUser();
+                AdminUser prince = adminUserRepository.findByEmail("princesulekhiya@gmail.com").orElse(null);
+                if (prince == null) {
+                        prince = new AdminUser();
                         prince.setEmail("princesulekhiya@gmail.com");
-                        prince.setPassword(passwordEncoder.encode("Pince@123"));
-                        prince.setFullName("Prince Sulekhiya");
-                        prince.setRole("ADMIN");
                         prince.setActive(true);
-                        adminUserRepository.save(prince);
-                        System.out.println("✓ Prince admin created");
+                }
+                prince.setPassword(passwordEncoder.encode("Prince@123"));
+                prince.setFullName("Prince Sulekhiya");
+                prince.setRole("ADMIN");
+                adminUserRepository.save(prince);
+                System.out.println("✓ Prince admin updated/created");
+
+                seedColleges();
+                // Seed Bhopal colleges
+                try {
+                        bhopalCollegeSeeder.seedBhopalColleges();
+                } catch (Exception e) {
+                        System.err.println("Error seeding Bhopal colleges: " + e.getMessage());
                 }
 
-                // Seed colleges if database is empty
-                if (collegeRepository.count() == 0) {
-                        seedColleges();
-                        // Seed Bhopal colleges
-                        bhopalCollegeSeeder.seedBhopalColleges();
-                        // Seed all MP colleges (Indore, Gwalior, Jabalpur, Ujjain, Rewa, Sagar, etc.)
+                // Seed all MP colleges (Indore, Gwalior, Jabalpur, Ujjain, Rewa, Sagar, etc.)
+                try {
                         mpCollegeSeeder.seedAllMPColleges();
-                        System.out.println("✓ All MP colleges seeded successfully!");
+                } catch (Exception e) {
+                        System.err.println("Error seeding MP colleges: " + e.getMessage());
                 }
+
+                System.out.println("✓ All MP colleges seeded/updated successfully!");
         }
 
         private void seedColleges() {
