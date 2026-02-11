@@ -1655,10 +1655,13 @@ public class DataSeeder implements CommandLineRunner {
 
         private Course createCourse(College college, String name, String specialization,
                         String degree, Integer duration, String description, String eligibility) {
-                Course course = new Course();
-                course.setCollege(college);
-                course.setName(name);
-                course.setSpecialization(specialization);
+                Course course = courseRepository.findByCollegeAndNameAndSpecialization(college, name, specialization);
+                if (course == null) {
+                        course = new Course();
+                        course.setCollege(college);
+                        course.setName(name);
+                        course.setSpecialization(specialization);
+                }
                 course.setDegree(degree);
                 course.setDurationYears(duration);
                 course.setDescription(description);
@@ -1668,21 +1671,27 @@ public class DataSeeder implements CommandLineRunner {
         }
 
         private void createSeatMatrix(Course course, String category, Integer total, Integer available, String year) {
-                SeatMatrix seat = new SeatMatrix();
-                seat.setCourse(course);
-                seat.setCategory(category);
+                SeatMatrix seat = seatMatrixRepository.findByCourseAndCategoryAndAcademicYear(course, category, year);
+                if (seat == null) {
+                        seat = new SeatMatrix();
+                        seat.setCourse(course);
+                        seat.setCategory(category);
+                        seat.setAcademicYear(year);
+                }
                 seat.setTotalSeats(total);
                 seat.setAvailableSeats(available);
-                seat.setAcademicYear(year);
                 seatMatrixRepository.save(seat);
         }
 
         private void createFeeStructure(Course course, String year, BigDecimal tuition, BigDecimal hostel,
                         BigDecimal transport, BigDecimal library, BigDecimal lab,
                         BigDecimal other, BigDecimal total, String feeType) {
-                FeeStructure fee = new FeeStructure();
-                fee.setCourse(course);
-                fee.setAcademicYear(year);
+                FeeStructure fee = feeStructureRepository.findByCourseAndAcademicYear(course, year);
+                if (fee == null) {
+                        fee = new FeeStructure();
+                        fee.setCourse(course);
+                        fee.setAcademicYear(year);
+                }
                 fee.setTuitionFee(tuition);
                 fee.setHostelFee(hostel);
                 fee.setTransportFee(transport);
@@ -1696,11 +1705,15 @@ public class DataSeeder implements CommandLineRunner {
 
         private void createCutoff(Course course, String category, String year, String round,
                         BigDecimal percentage, Integer rank, String examType) {
-                Cutoff cutoff = new Cutoff();
-                cutoff.setCourse(course);
-                cutoff.setCategory(category);
-                cutoff.setAcademicYear(year);
-                cutoff.setRound(round);
+                Cutoff cutoff = cutoffRepository.findByCourseAndCategoryAndAcademicYearAndRound(course, category, year,
+                                round);
+                if (cutoff == null) {
+                        cutoff = new Cutoff();
+                        cutoff.setCourse(course);
+                        cutoff.setCategory(category);
+                        cutoff.setAcademicYear(year);
+                        cutoff.setRound(round);
+                }
                 cutoff.setCutoffPercentage(percentage);
                 cutoff.setCutoffRank(rank);
                 cutoff.setExamType(examType);

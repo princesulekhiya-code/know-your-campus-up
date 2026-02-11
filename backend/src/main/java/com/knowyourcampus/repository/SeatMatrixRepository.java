@@ -12,15 +12,15 @@ import java.util.Optional;
 @Repository
 public interface SeatMatrixRepository extends JpaRepository<SeatMatrix, Long> {
 
-    List<SeatMatrix> findByCourseId(Long courseId);
+        List<SeatMatrix> findByCourseId(Long courseId);
 
-    List<SeatMatrix> findByAcademicYear(String academicYear);
+        List<SeatMatrix> findByAcademicYear(String academicYear);
 
-    @Query("SELECT s FROM SeatMatrix s WHERE s.course.id = :courseId AND s.academicYear = :academicYear")
-    List<SeatMatrix> findByCourseIdAndAcademicYear(
-            @Param("courseId") Long courseId,
-            @Param("academicYear") String academicYear);
+        @Query("SELECT s FROM SeatMatrix s WHERE s.course.id = :courseId AND s.academicYear = :academicYear")
+        List<SeatMatrix> findByCourseIdAndAcademicYear(
+                        @Param("courseId") Long courseId,
+                        @Param("academicYear") String academicYear);
 
-    Optional<SeatMatrix> findByCourseIdAndCategoryAndAcademicYear(
-            Long courseId, String category, String academicYear);
+        SeatMatrix findByCourseAndCategoryAndAcademicYear(
+                        com.knowyourcampus.entity.Course course, String category, String academicYear);
 }

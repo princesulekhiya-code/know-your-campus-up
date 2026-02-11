@@ -24,4 +24,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
             "LOWER(c.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
             "LOWER(c.specialization) LIKE LOWER(CONCAT('%', :query, '%'))")
     List<Course> searchCourses(@Param("query") String query);
+
+    Course findByCollegeAndNameAndSpecialization(com.knowyourcampus.entity.College college, String name,
+            String specialization);
 }
