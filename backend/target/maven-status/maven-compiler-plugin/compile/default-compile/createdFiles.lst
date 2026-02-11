@@ -19,6 +19,7 @@ com\knowyourcampus\controller\AnalyticsController.class
 com\knowyourcampus\security\JwtAuthenticationFilter.class
 com\knowyourcampus\service\AnalyticsService.class
 com\knowyourcampus\controller\CutoffController.class
+com\knowyourcampus\config\BhopalCollegeSeeder.class
 com\knowyourcampus\repository\StudentLeadRepository.class
 com\knowyourcampus\controller\CourseController.class
 com\knowyourcampus\controller\AuthController.class
@@ -36,6 +37,7 @@ com\knowyourcampus\security\JwtUtil.class
 com\knowyourcampus\controller\CollegeController.class
 com\knowyourcampus\repository\CollegeRepository.class
 com\knowyourcampus\entity\AdminUser.class
+com\knowyourcampus\config\MPCollegeSeeder.class
 com\knowyourcampus\entity\StudentLead.class
 com\knowyourcampus\entity\College.class
 com\knowyourcampus\exception\GlobalExceptionHandler.class

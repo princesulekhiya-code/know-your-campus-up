@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CollegeRepository extends JpaRepository<College, Long> {
 
-        College findByName(String name);
+        List<College> findByName(String name);
 
         List<College> findByType(String type);
 
