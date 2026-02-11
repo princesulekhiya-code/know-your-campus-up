@@ -124,6 +124,13 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-cloudwatch2</artifactId>
         </dependency>
+
+        <!-- CloudWatch Logs Appender -->
+        <dependency>
+            <groupId>ca.pjer</groupId>
+            <artifactId>logback-awslogs-appender</artifactId>
+            <version>1.6.0</version>
+        </dependency>
     </dependencies>
     
     <build>
