@@ -1090,18 +1090,18 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("5000"), new BigDecimal("5000"),
                                 new BigDecimal("175000"), "PER_YEAR");
 
-                // Sam Global University, Karur
+                // Sam Global University, Bhopal
                 College samGlobal = createCollege(
                                 "Sam Global University",
-                                "Sam Global University is a private university in Karur offering quality education in engineering, management, and arts programs.",
+                                "Sam Global University is a private university in Bhopal offering quality education in engineering, management, and arts programs.",
                                 "PRIVATE",
-                                "Karur",
-                                "Tamil Nadu",
-                                "NH-7, Karur, Tamil Nadu 639002",
-                                "639002",
-                                "04324-250000",
-                                "info@samglobal.edu.in",
-                                "https://www.samglobal.edu.in",
+                                "Bhopal",
+                                "Madhya Pradesh",
+                                "NH-12, Sahpura, Bhopal, MP 462039",
+                                "462039",
+                                "0755-4350999",
+                                "info@samglobaluniversity.ac.in",
+                                "https://www.samglobaluniversity.ac.in",
                                 "A",
                                 true,
                                 2010,
@@ -1122,8 +1122,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("8000"), new BigDecimal("7000"),
                                 new BigDecimal("240000"), "PER_YEAR");
 
-                createCutoff(samBtechCSE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("75.0"), null, "TNEA");
-                createCutoff(samBtechCSE, "OBC", "2023-2024", "Round 1", new BigDecimal("70.0"), null, "TNEA");
+                createCutoff(samBtechCSE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("75.0"), null, "MP DTE");
+                createCutoff(samBtechCSE, "OBC", "2023-2024", "Round 1", new BigDecimal("70.0"), null, "MP DTE");
 
                 // MBA
                 Course samMBA = createCourse(samGlobal, "MBA", "Business Administration", "PG", 2,
@@ -1149,8 +1149,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("2000"), new BigDecimal("3000"), new BigDecimal("3000"),
                                 new BigDecimal("106000"), "PER_YEAR");
 
-                createCutoff(samBscCS, "GENERAL", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "TNEA");
-                createCutoff(samBscCS, "OBC", "2023-2024", "Round 1", new BigDecimal("55.0"), null, "TNEA");
+                createCutoff(samBscCS, "GENERAL", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "MP DTE");
+                createCutoff(samBscCS, "OBC", "2023-2024", "Round 1", new BigDecimal("55.0"), null, "MP DTE");
 
                 // B.Tech ECE
                 Course samBtechECE = createCourse(samGlobal, "B.Tech", "Electronics and Communication Engineering",
@@ -1168,8 +1168,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("8000"), new BigDecimal("7000"),
                                 new BigDecimal("230000"), "PER_YEAR");
 
-                createCutoff(samBtechECE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("72.0"), null, "TNEA");
-                createCutoff(samBtechECE, "OBC", "2023-2024", "Round 1", new BigDecimal("67.0"), null, "TNEA");
+                createCutoff(samBtechECE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("72.0"), null, "MP DTE");
+                createCutoff(samBtechECE, "OBC", "2023-2024", "Round 1", new BigDecimal("67.0"), null, "MP DTE");
 
                 // B.Tech Mechanical Engineering
                 Course samBtechMech = createCourse(samGlobal, "B.Tech", "Mechanical Engineering", "UG", 4,
@@ -1185,8 +1185,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("8000"), new BigDecimal("7000"),
                                 new BigDecimal("220000"), "PER_YEAR");
 
-                createCutoff(samBtechMech, "GENERAL", "2023-2024", "Round 1", new BigDecimal("68.0"), null, "TNEA");
-                createCutoff(samBtechMech, "OBC", "2023-2024", "Round 1", new BigDecimal("63.0"), null, "TNEA");
+                createCutoff(samBtechMech, "GENERAL", "2023-2024", "Round 1", new BigDecimal("68.0"), null, "MP DTE");
+                createCutoff(samBtechMech, "OBC", "2023-2024", "Round 1", new BigDecimal("63.0"), null, "MP DTE");
 
                 // B.Tech Civil Engineering
                 Course samBtechCivil = createCourse(samGlobal, "B.Tech", "Civil Engineering", "UG", 4,
@@ -1202,8 +1202,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("7000"), new BigDecimal("6000"),
                                 new BigDecimal("208000"), "PER_YEAR");
 
-                createCutoff(samBtechCivil, "GENERAL", "2023-2024", "Round 1", new BigDecimal("65.0"), null, "TNEA");
-                createCutoff(samBtechCivil, "OBC", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "TNEA");
+                createCutoff(samBtechCivil, "GENERAL", "2023-2024", "Round 1", new BigDecimal("65.0"), null, "MP DTE");
+                createCutoff(samBtechCivil, "OBC", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "MP DTE");
 
                 // B.Tech EEE
                 Course samBtechEEE = createCourse(samGlobal, "B.Tech", "Electrical and Electronics Engineering", "UG",
@@ -1221,8 +1221,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("8000"), new BigDecimal("7000"),
                                 new BigDecimal("225000"), "PER_YEAR");
 
-                createCutoff(samBtechEEE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("70.0"), null, "TNEA");
-                createCutoff(samBtechEEE, "OBC", "2023-2024", "Round 1", new BigDecimal("65.0"), null, "TNEA");
+                createCutoff(samBtechEEE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("70.0"), null, "MP DTE");
+                createCutoff(samBtechEEE, "OBC", "2023-2024", "Round 1", new BigDecimal("65.0"), null, "MP DTE");
 
                 // B.Tech IT
                 Course samBtechIT = createCourse(samGlobal, "B.Tech", "Information Technology", "UG", 4,
@@ -1238,8 +1238,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("8000"), new BigDecimal("7000"),
                                 new BigDecimal("235000"), "PER_YEAR");
 
-                createCutoff(samBtechIT, "GENERAL", "2023-2024", "Round 1", new BigDecimal("73.0"), null, "TNEA");
-                createCutoff(samBtechIT, "OBC", "2023-2024", "Round 1", new BigDecimal("68.0"), null, "TNEA");
+                createCutoff(samBtechIT, "GENERAL", "2023-2024", "Round 1", new BigDecimal("73.0"), null, "MP DTE");
+                createCutoff(samBtechIT, "OBC", "2023-2024", "Round 1", new BigDecimal("68.0"), null, "MP DTE");
 
                 // B.Tech AI & Data Science
                 Course samBtechAIDS = createCourse(samGlobal, "B.Tech", "Artificial Intelligence and Data Science",
@@ -1256,8 +1256,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("5000"), new BigDecimal("8000"), new BigDecimal("7000"),
                                 new BigDecimal("250000"), "PER_YEAR");
 
-                createCutoff(samBtechAIDS, "GENERAL", "2023-2024", "Round 1", new BigDecimal("78.0"), null, "TNEA");
-                createCutoff(samBtechAIDS, "OBC", "2023-2024", "Round 1", new BigDecimal("73.0"), null, "TNEA");
+                createCutoff(samBtechAIDS, "GENERAL", "2023-2024", "Round 1", new BigDecimal("78.0"), null, "MP DTE");
+                createCutoff(samBtechAIDS, "OBC", "2023-2024", "Round 1", new BigDecimal("73.0"), null, "MP DTE");
 
                 // BBA
                 Course samBBA = createCourse(samGlobal, "BBA", "Business Administration", "UG", 3,
@@ -1399,8 +1399,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("180000"), "PER_YEAR");
 
                 createCutoff(samMtechCSE, "GENERAL", "2023-2024", "Round 1", new BigDecimal("65.0"), null,
-                                "GATE / TANCET");
-                createCutoff(samMtechCSE, "OBC", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "GATE / TANCET");
+                                "GATE / MP DTE");
+                createCutoff(samMtechCSE, "OBC", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "GATE / MP DTE");
 
                 // M.Tech VLSI Design
                 Course samMtechVLSI = createCourse(samGlobal, "M.Tech", "VLSI Design", "PG", 2,
@@ -1416,11 +1416,11 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("175000"), "PER_YEAR");
 
                 createCutoff(samMtechVLSI, "GENERAL", "2023-2024", "Round 1", new BigDecimal("62.0"), null,
-                                "GATE / TANCET");
+                                "GATE / MP DTE");
 
                 // MCA
                 Course samMCA = createCourse(samGlobal, "MCA", "Computer Applications", "PG", 2,
-                                "Master of Computer Applications", "BCA/B.Sc CS with 50% / TANCET qualified");
+                                "Master of Computer Applications", "BCA/B.Sc CS with 50% / MP DTE qualified");
 
                 createSeatMatrix(samMCA, "GENERAL", 60, 18, "2026-27");
                 createSeatMatrix(samMCA, "OBC", 30, 9, "2026-27");
@@ -1431,8 +1431,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("3000"), new BigDecimal("5000"), new BigDecimal("4000"),
                                 new BigDecimal("155000"), "PER_YEAR");
 
-                createCutoff(samMCA, "GENERAL", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "TANCET");
-                createCutoff(samMCA, "OBC", "2023-2024", "Round 1", new BigDecimal("55.0"), null, "TANCET");
+                createCutoff(samMCA, "GENERAL", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "MP DTE");
+                createCutoff(samMCA, "OBC", "2023-2024", "Round 1", new BigDecimal("55.0"), null, "MP DTE");
 
                 // M.Sc Computer Science
                 Course samMscCS = createCourse(samGlobal, "M.Sc", "Computer Science", "PG", 2,
@@ -1491,8 +1491,8 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("4000"), new BigDecimal("8000"), new BigDecimal("6000"),
                                 new BigDecimal("193000"), "PER_YEAR");
 
-                createCutoff(samBPharm, "GENERAL", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "TNEA");
-                createCutoff(samBPharm, "OBC", "2023-2024", "Round 1", new BigDecimal("55.0"), null, "TNEA");
+                createCutoff(samBPharm, "GENERAL", "2023-2024", "Round 1", new BigDecimal("60.0"), null, "MP DTE");
+                createCutoff(samBPharm, "OBC", "2023-2024", "Round 1", new BigDecimal("55.0"), null, "MP DTE");
 
                 // D.Pharm
                 Course samDPharm = createCourse(samGlobal, "D.Pharm", "Pharmacy", "UG", 2,
@@ -1522,7 +1522,7 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("181000"), "PER_YEAR");
 
                 createCutoff(samMBAHR, "GENERAL", "2023-2024", "Round 1", new BigDecimal("55.0"), null,
-                                "CAT / MAT / TANCET");
+                                "CAT / MAT / MP DTE");
 
                 // MBA Finance
                 Course samMBAFin = createCourse(samGlobal, "MBA", "Finance", "PG", 2,
@@ -1538,7 +1538,7 @@ public class DataSeeder implements CommandLineRunner {
                                 new BigDecimal("184000"), "PER_YEAR");
 
                 createCutoff(samMBAFin, "GENERAL", "2023-2024", "Round 1", new BigDecimal("57.0"), null,
-                                "CAT / MAT / TANCET");
+                                "CAT / MAT / MP DTE");
 
                 // Ph.D Computer Science
                 Course samPhdCS = createCourse(samGlobal, "Ph.D", "Computer Science", "Doctoral", 3,
