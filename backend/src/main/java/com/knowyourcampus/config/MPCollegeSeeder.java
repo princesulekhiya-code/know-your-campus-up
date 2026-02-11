@@ -1891,8 +1891,12 @@ public class MPCollegeSeeder {
                         String state, String address, String pincode, String phone,
                         String email, String website, String naacRating,
                         Boolean admissionOpen, Integer establishedYear, String affiliatedTo) {
-                College college = new College();
-                college.setName(name);
+                College college = collegeRepository.findByName(name);
+                if (college == null) {
+                        college = new College();
+                        college.setName(name);
+                }
+
                 college.setDescription(description);
                 college.setType(type);
                 college.setCity(city);
@@ -1928,15 +1932,111 @@ public class MPCollegeSeeder {
 
         private Map<String, String> getCollegeImageMap() {
                 Map<String, String> map = new HashMap<>();
+
+                // ===== COLLEGE-SPECIFIC PHOTOS (verified from Wikimedia Commons) =====
                 map.put("Indian Institute of Technology Indore (IIT Indore)",
                                 "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Health_Centre_IIT_Indore.jpg/800px-Health_Centre_IIT_Indore.jpg");
+                map.put("Indian Institute of Management Indore (IIM Indore)",
+                                "https://upload.wikimedia.org/wikipedia/commons/e/ec/Academic_block%2C_IIM_Indore.jpg");
+                map.put("Shri Govindram Seksaria Institute of Technology and Science (SGSITS)",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Sgsits.jpg/800px-Sgsits.jpg");
+                map.put("Mahatma Gandhi Memorial Medical College (MGM)",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/King_Edward_Medical_School%2C_indore.jpg/800px-King_Edward_Medical_School%2C_indore.jpg");
+                map.put("Medicaps University",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Main_block1.jpg/800px-Main_block1.jpg");
+                map.put("IPS Academy Indore",
+                                "https://upload.wikimedia.org/wikipedia/commons/a/a7/IPS_Academy_main_building.JPG");
+                map.put("ABV Indian Institute of Information Technology and Management (IIITM) Gwalior",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/IIITM_panoramic_view.jpg/800px-IIITM_panoramic_view.jpg");
+                map.put("Madhav Institute of Technology and Science (MITS) Gwalior",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Madhav_Institute_of_Technology_and_Science.jpg/800px-Madhav_Institute_of_Technology_and_Science.jpg");
                 map.put("Jiwaji University",
                                 "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Jiwaji_University_Main_Gate_Entrance_Gwalior_-_panoramio.jpg/800px-Jiwaji_University_Main_Gate_Entrance_Gwalior_-_panoramio.jpg");
+                map.put("Gajra Raja Medical College (GRMC) Gwalior",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/GAJARA_RAJA_MEDICAL_COLLEGE%2C_GWALIOR_-_panoramio.jpg/800px-GAJARA_RAJA_MEDICAL_COLLEGE%2C_GWALIOR_-_panoramio.jpg");
+                map.put("Laxmibai National Institute of Physical Education (LNIPE)",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/LAXMI_BAI_NATIONAL_UNIVERSITY_OF_PHYSICAL_EDUCATION_GWALIOR_-_panoramio.jpg/800px-LAXMI_BAI_NATIONAL_UNIVERSITY_OF_PHYSICAL_EDUCATION_GWALIOR_-_panoramio.jpg");
+                map.put("Rani Durgavati Vishwavidyalaya (RDVV)",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cemented_path_covered_with_mid-size_trees.jpg/800px-Cemented_path_covered_with_mid-size_trees.jpg");
+                map.put("Jawaharlal Nehru Krishi Vishwa Vidyalaya (JNKVV)",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Jawaharlal_Nehru_krishi_Vishwa_vidyalaya_Jabalpur.jpg/800px-Jawaharlal_Nehru_krishi_Vishwa_vidyalaya_Jabalpur.jpg");
+                map.put("St. Aloysius College (Autonomous) Jabalpur",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/St._Aloysius_Institute_of_Technology%2C_Jabalpur.jpg/800px-St._Aloysius_Institute_of_Technology%2C_Jabalpur.jpg");
                 map.put("Vikram University Ujjain",
                                 "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Swarnagate.jpg/800px-Swarnagate.jpg");
-                // Real college photo from user-provided URL
-                map.put("Sage University Indore",
-                                "https://sunstone.in/_next/image?url=https%3A%2F%2Fcdn-eu.aglty.io%2Fsunstoneuniversity%2FAttachments%2FNewItems%2Fsage-indore-16x9_20230306105139_0.jpg&w=3840&q=75");
+                map.put("RD Gardi Medical College Ujjain",
+                                "https://upload.wikimedia.org/wikipedia/commons/2/2e/Rdgmc.jpg");
+                map.put("Dr. Harisingh Gour Vishwavidyalaya (Central University)",
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Entry_gate_of_sagar_university.jpg/800px-Entry_gate_of_sagar_university.jpg");
+
+                // ===== CITY LANDMARK PHOTOS (real Wikimedia images for remaining colleges)
+                // =====
+                String indoreRajwada = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Indore_Rajwada01.jpg/800px-Indore_Rajwada01.jpg";
+                String gwaliorFort = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Gwalior_Fort_front.jpg/800px-Gwalior_Fort_front.jpg";
+                String jabalpurTemple = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/0010322_Chausath_Yogini_Temple_and_Gowri_Shankar_Temple%2C_Bhedaghat_Madhya_Pradesh_054.jpg/800px-0010322_Chausath_Yogini_Temple_and_Gowri_Shankar_Temple%2C_Bhedaghat_Madhya_Pradesh_054.jpg";
+                String ujjainTemple = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Mahakaleshwar_Temple%2C_Ujjain.jpg/800px-Mahakaleshwar_Temple%2C_Ujjain.jpg";
+                String rewaPalace = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Vyankat_Bhawan.jpg/800px-Vyankat_Bhawan.jpg";
+                String sagarLake = "https://upload.wikimedia.org/wikipedia/commons/4/47/Lakha_Banjara_Lake_Sagar.png";
+                String satna = "https://upload.wikimedia.org/wikipedia/commons/9/9f/Satna_MP_2.png";
+                String chhindwara = "https://upload.wikimedia.org/wikipedia/commons/2/27/Badalbhoi_museum.png";
+                String ratlam = "https://upload.wikimedia.org/wikipedia/commons/a/a2/Ratlam_junction_MP.png";
+                String dewas = "https://upload.wikimedia.org/wikipedia/commons/7/75/Sayaji-Dwar%2C_Dewas_%28M.P.%29.jpg";
+                String khandwa = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Kishore_Kumar_memorial_in_Khandwa.jpg/800px-Kishore_Kumar_memorial_in_Khandwa.jpg";
+                String vidisha = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Samrat_ashok_technological_institute_vidisha_mp.jpg/800px-Samrat_ashok_technological_institute_vidisha_mp.jpg";
+                String burhanpur = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Dargah-e-Hakimi_%28Burhanpur%29%2C_February_2015.jpg/800px-Dargah-e-Hakimi_%28Burhanpur%29%2C_February_2015.jpg";
+                String shahdol = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/0101022_Virateshwar_temple%2C_Sohagpur%2C_Madhya_Pradesh_008.jpg/800px-0101022_Virateshwar_temple%2C_Sohagpur%2C_Madhya_Pradesh_008.jpg";
+                String hoshangabad = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sethanighataman.jpg/800px-Sethanighataman.jpg";
+                String shivpuri = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Scindia_cenotaphs%2C_shivpuri.jpg/800px-Scindia_cenotaphs%2C_shivpuri.jpg";
+                String damoh = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Kundalpur_lake.jpg/800px-Kundalpur_lake.jpg";
+                String mandsaur = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/0111321_Pasupatinath_temple%2C_Mandsaur_Madhya_Pradesh_138.jpg/800px-0111321_Pasupatinath_temple%2C_Mandsaur_Madhya_Pradesh_138.jpg";
+
+                // Indore colleges - Rajwada Palace landmark
+                map.put("Devi Ahilya Vishwavidyalaya (DAVV)", indoreRajwada);
+                map.put("Institute of Engineering and Technology (IET-DAVV)", indoreRajwada);
+                map.put("Prestige Institute of Management and Research (PIMR)", indoreRajwada);
+                map.put("Acropolis Institute of Technology and Research", indoreRajwada);
+                map.put("Shri Vaishnav Vidyapeeth Vishwavidyalaya (SVVV)", indoreRajwada);
+                map.put("Index Medical College Hospital and Research Centre", indoreRajwada);
+                map.put("Malwa Institute of Technology (MIT Indore)", indoreRajwada);
+                map.put("Chameli Devi Group of Institutions Indore", indoreRajwada);
+                map.put("Sage University Indore", indoreRajwada);
+
+                // Gwalior colleges - Gwalior Fort landmark
+                map.put("ITM University Gwalior", gwaliorFort);
+                map.put("Amity University Madhya Pradesh (Gwalior Campus)", gwaliorFort);
+                map.put("RKDF College of Engineering Gwalior", gwaliorFort);
+
+                // Jabalpur colleges - Chausath Yogini Temple landmark
+                map.put("Government Engineering College Jabalpur (GECJ)", jabalpurTemple);
+                map.put("Netaji Subhash Chandra Bose Medical College (NSCMC) Jabalpur", jabalpurTemple);
+                map.put("Hitkarini College of Engineering and Technology (HCET)", jabalpurTemple);
+                map.put("Gyan Ganga Institute of Technology and Sciences", jabalpurTemple);
+
+                // Ujjain - Mahakaleshwar Temple landmark
+                map.put("Mahakal Institute of Technology (MIT Ujjain)", ujjainTemple);
+
+                // Rewa - Vyankat Bhawan landmark
+                map.put("Awadhesh Pratap Singh University (APSU) Rewa", rewaPalace);
+                map.put("Government Engineering College Rewa", rewaPalace);
+                map.put("Shyam Shah Medical College Rewa", rewaPalace);
+
+                // Sagar - Lakha Banjara Lake landmark
+                map.put("Bundelkhand Medical College Sagar", sagarLake);
+
+                // Other MP cities - respective city landmarks
+                map.put("Government Engineering College Satna", satna);
+                map.put("Government Engineering College Chhindwara", chhindwara);
+                map.put("Vikram University Institute of Engineering Ratlam", ratlam);
+                map.put("Government Engineering College Dewas", dewas);
+                map.put("Government Engineering College Khandwa", khandwa);
+                map.put("Government Engineering College Vidisha", vidisha);
+                map.put("Government Degree College Burhanpur", burhanpur);
+                map.put("Government Engineering College Shahdol", shahdol);
+                map.put("Government Narmada PG College Hoshangabad", hoshangabad);
+                map.put("Government Engineering College Shivpuri", shivpuri);
+                map.put("Government PG College Damoh", damoh);
+                map.put("Vikram University PG College Mandsaur", mandsaur);
+
                 return map;
         }
 

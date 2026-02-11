@@ -3053,8 +3053,12 @@ public class BhopalCollegeSeeder {
                         String state, String address, String pincode, String phone,
                         String email, String website, String naacRating,
                         Boolean admissionOpen, Integer establishedYear, String affiliatedTo) {
-                College college = new College();
-                college.setName(name);
+                College college = collegeRepository.findByName(name);
+                if (college == null) {
+                        college = new College();
+                        college.setName(name);
+                }
+
                 college.setDescription(description);
                 college.setType(type);
                 college.setCity(city);
