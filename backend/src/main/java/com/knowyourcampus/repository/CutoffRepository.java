@@ -17,6 +17,7 @@ public interface CutoffRepository extends JpaRepository<Cutoff, Long> {
 
     List<Cutoff> findByCourseIdOrderByAcademicYearDesc(Long courseId);
 
-    Cutoff findByCourseAndCategoryAndAcademicYearAndRound(com.knowyourcampus.entity.Course course, String category,
+    List<Cutoff> findByCourseAndCategoryAndAcademicYearAndRound(com.knowyourcampus.entity.Course course,
+            String category,
             String academicYear, String round);
 }

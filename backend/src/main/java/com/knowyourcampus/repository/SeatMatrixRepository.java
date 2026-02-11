@@ -21,6 +21,6 @@ public interface SeatMatrixRepository extends JpaRepository<SeatMatrix, Long> {
                         @Param("courseId") Long courseId,
                         @Param("academicYear") String academicYear);
 
-        SeatMatrix findByCourseAndCategoryAndAcademicYear(
+        List<SeatMatrix> findByCourseAndCategoryAndAcademicYear(
                         com.knowyourcampus.entity.Course course, String category, String academicYear);
 }

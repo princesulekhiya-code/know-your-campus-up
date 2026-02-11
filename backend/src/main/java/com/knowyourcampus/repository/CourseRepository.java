@@ -11,20 +11,20 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    List<Course> findByCollegeId(Long collegeId);
+        List<Course> findByCollegeId(Long collegeId);
 
-    List<Course> findByDegree(String degree);
+        List<Course> findByDegree(String degree);
 
-    List<Course> findByActive(Boolean active);
+        List<Course> findByActive(Boolean active);
 
-    @Query("SELECT c FROM Course c WHERE c.college.id = :collegeId AND c.active = true")
-    List<Course> findActiveByCollegeId(@Param("collegeId") Long collegeId);
+        @Query("SELECT c FROM Course c WHERE c.college.id = :collegeId AND c.active = true")
+        List<Course> findActiveByCollegeId(@Param("collegeId") Long collegeId);
 
-    @Query("SELECT c FROM Course c WHERE " +
-            "LOWER(c.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-            "LOWER(c.specialization) LIKE LOWER(CONCAT('%', :query, '%'))")
-    List<Course> searchCourses(@Param("query") String query);
+        @Query("SELECT c FROM Course c WHERE " +
+                        "LOWER(c.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+                        "LOWER(c.specialization) LIKE LOWER(CONCAT('%', :query, '%'))")
+        List<Course> searchCourses(@Param("query") String query);
 
-    Course findByCollegeAndNameAndSpecialization(com.knowyourcampus.entity.College college, String name,
-            String specialization);
+        List<Course> findByCollegeAndNameAndSpecialization(com.knowyourcampus.entity.College college, String name,
+                        String specialization);
 }

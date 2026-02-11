@@ -13,6 +13,6 @@ public interface FeeStructureRepository extends JpaRepository<FeeStructure, Long
 
     List<FeeStructure> findByAcademicYear(String academicYear);
 
-    FeeStructure findByCourseAndAcademicYear(
+    List<FeeStructure> findByCourseAndAcademicYear(
             com.knowyourcampus.entity.Course course, String academicYear);
 }

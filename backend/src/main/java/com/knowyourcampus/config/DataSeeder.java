@@ -1655,7 +1655,9 @@ public class DataSeeder implements CommandLineRunner {
 
         private Course createCourse(College college, String name, String specialization,
                         String degree, Integer duration, String description, String eligibility) {
-                Course course = courseRepository.findByCollegeAndNameAndSpecialization(college, name, specialization);
+                java.util.List<Course> courses = courseRepository.findByCollegeAndNameAndSpecialization(college, name,
+                                specialization);
+                Course course = courses.isEmpty() ? null : courses.get(0);
                 if (course == null) {
                         course = new Course();
                         course.setCollege(college);
@@ -1671,7 +1673,9 @@ public class DataSeeder implements CommandLineRunner {
         }
 
         private void createSeatMatrix(Course course, String category, Integer total, Integer available, String year) {
-                SeatMatrix seat = seatMatrixRepository.findByCourseAndCategoryAndAcademicYear(course, category, year);
+                java.util.List<SeatMatrix> seats = seatMatrixRepository.findByCourseAndCategoryAndAcademicYear(course,
+                                category, year);
+                SeatMatrix seat = seats.isEmpty() ? null : seats.get(0);
                 if (seat == null) {
                         seat = new SeatMatrix();
                         seat.setCourse(course);
@@ -1686,7 +1690,8 @@ public class DataSeeder implements CommandLineRunner {
         private void createFeeStructure(Course course, String year, BigDecimal tuition, BigDecimal hostel,
                         BigDecimal transport, BigDecimal library, BigDecimal lab,
                         BigDecimal other, BigDecimal total, String feeType) {
-                FeeStructure fee = feeStructureRepository.findByCourseAndAcademicYear(course, year);
+                java.util.List<FeeStructure> fees = feeStructureRepository.findByCourseAndAcademicYear(course, year);
+                FeeStructure fee = fees.isEmpty() ? null : fees.get(0);
                 if (fee == null) {
                         fee = new FeeStructure();
                         fee.setCourse(course);
@@ -1705,8 +1710,9 @@ public class DataSeeder implements CommandLineRunner {
 
         private void createCutoff(Course course, String category, String year, String round,
                         BigDecimal percentage, Integer rank, String examType) {
-                Cutoff cutoff = cutoffRepository.findByCourseAndCategoryAndAcademicYearAndRound(course, category, year,
-                                round);
+                java.util.List<Cutoff> cutoffs = cutoffRepository.findByCourseAndCategoryAndAcademicYearAndRound(course,
+                                category, year, round);
+                Cutoff cutoff = cutoffs.isEmpty() ? null : cutoffs.get(0);
                 if (cutoff == null) {
                         cutoff = new Cutoff();
                         cutoff.setCourse(course);
