@@ -45,32 +45,60 @@ const Home = () => {
     return (
         <div className="animate-fade-in">
             {/* Hero Section */}
-            <section className="relative bg-gradient-to-r from-action-600 via-action-700 to-action-800 text-white py-20">
-                <div className="absolute inset-0 bg-black/20"></div>
+            <section className="relative text-white py-24 md:py-32 overflow-hidden min-h-[520px] flex items-center">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{
+                        backgroundImage: `url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=80')`,
+                    }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-action-900/85 via-action-800/75 to-action-700/65" />
+                <div className="absolute inset-0 bg-black/20" />
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-slide-up text-white">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7 }}
+                            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white drop-shadow-lg"
+                        >
                             Find Your Dream College
-                        </h1>
-                        <p className="text-xl md:text-2xl mb-8 text-white/95">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.2 }}
+                            className="text-xl md:text-2xl mb-10 text-white/95 drop-shadow-md"
+                        >
                             Discover, Compare, and Apply to India's Top Colleges
-                        </p>
+                        </motion.p>
 
                         {/* Search Bar */}
-                        <EnhancedSearch />
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.4 }}
+                        >
+                            <EnhancedSearch />
+                        </motion.div>
 
                         {/* Quick Links */}
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <Link to="/colleges?type=GOVERNMENT" className="px-6 py-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition text-white font-medium">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, delay: 0.6 }}
+                            className="flex flex-wrap justify-center gap-4"
+                        >
+                            <Link to="/colleges?type=GOVERNMENT" className="px-6 py-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition text-white font-medium border border-white/20">
                                 Government Colleges
                             </Link>
-                            <Link to="/colleges?type=PRIVATE" className="px-6 py-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition text-white font-medium">
+                            <Link to="/colleges?type=PRIVATE" className="px-6 py-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition text-white font-medium border border-white/20">
                                 Private Colleges
                             </Link>
-                            <Link to="/colleges?naacRating=A%2B%2B" className="px-6 py-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition text-white font-medium">
+                            <Link to="/colleges?naacRating=A%2B%2B" className="px-6 py-2 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition text-white font-medium border border-white/20">
                                 Top Rated
                             </Link>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>
