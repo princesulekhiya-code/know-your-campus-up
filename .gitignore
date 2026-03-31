@@ -1,2 +1,25 @@
 
 knowyourcampus-key.pem
+
+# Backend
+backend/target/
+backend/.idea/
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files with secrets
+.env
+.env.local
+nul

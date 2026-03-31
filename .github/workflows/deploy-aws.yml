@@ -84,7 +84,7 @@ jobs:
         
         # 4. Generate .env file locally to avoid escaping issues, then upload
         echo "DB_HOST=$DB_HOST" > .env.prod
-        echo "DB_NAME=knowyourcampus" >> .env.prod
+        echo "DB_NAME=postgres" >> .env.prod
         echo "DB_USERNAME=$DB_USERNAME" >> .env.prod
         echo "DB_PASSWORD=$DB_PASSWORD" >> .env.prod
         echo "JWT_SECRET=$JWT_SECRET" >> .env.prod
