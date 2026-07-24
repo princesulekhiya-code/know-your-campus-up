@@ -1,3 +1,4 @@
+import { INDIAN_STATES } from '../utils/indianStates';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { FiUser, FiMail, FiPhone, FiMapPin, FiBook, FiCheckCircle } from 'react-icons/fi';
@@ -166,14 +167,9 @@ const AdmissionForm = () => {
                                         className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition"
                                     >
                                         <option value="">Select State</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Maharashtra">Maharashtra</option>
-                                        <option value="Karnataka">Karnataka</option>
-                                        <option value="Tamil Nadu">Tamil Nadu</option>
-                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                        <option value="West Bengal">West Bengal</option>
-                                        <option value="Gujarat">Gujarat</option>
-                                        <option value="Punjab">Punjab</option>
+                                        {INDIAN_STATES.map((st) => (
+                                            <option key={st} value={st}>{st}</option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>

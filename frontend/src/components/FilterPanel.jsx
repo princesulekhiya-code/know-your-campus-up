@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FiFilter, FiX } from 'react-icons/fi';
+import { INDIAN_STATES } from '../utils/indianStates';
 
 const FilterPanel = ({ onFilterChange, onReset }) => {
     const [filters, setFilters] = useState({
@@ -81,14 +82,9 @@ const FilterPanel = ({ onFilterChange, onReset }) => {
                             className="input-field"
                         >
                             <option value="">All States</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="West Bengal">West Bengal</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Punjab">Punjab</option>
+                            {INDIAN_STATES.map((st) => (
+                                <option key={st} value={st}>{st}</option>
+                            ))}
                         </select>
                     </div>
 

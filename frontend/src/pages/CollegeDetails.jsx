@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiMapPin, FiPhone, FiMail, FiGlobe, FiAward, FiCalendar, FiStar } from 'react-icons/fi';
@@ -83,6 +84,11 @@ const CollegeDetails = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+            <SEO
+                title={`${college.name}, ${college.city} - Admission 2026, Fees, Courses, Cutoffs`}
+                description={`${college.name} ${college.city} ${college.state}. Explore fees structure, courses offered, NEET/JEE cutoffs, seat matrix, student reviews and direct admission procedure on Know Your Campus.`}
+                keywords={`${college.name}, ${college.name} fees, ${college.name} admission 2026, ${college.name} cutoff, colleges in ${college.city}, top private college ${college.city}, top colleges in ${college.state}`}
+            />
             {/* Banner */}
             <div className="h-64 bg-gradient-to-r from-primary-600 to-secondary-600 relative">
                 {college.bannerUrl && (

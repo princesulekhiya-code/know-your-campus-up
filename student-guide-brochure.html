@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Know Your Campus — Student Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap');
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f0f4ff;
+      color: #1a1a2e;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── PAGE (A4) ── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: #ffffff;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    /* ══════════════════════════════════════
+       HEADER
+    ══════════════════════════════════════ */
+    .header {
+      background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 40%, #2563eb 100%);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute; top: -80px; right: -80px;
+      width: 240px; height: 240px;
+      background: rgba(255,255,255,0.07); border-radius: 50%;
+    }
+    .header::after {
+      content: '';
+      position: absolute; bottom: -50px; left: 30%;
+      width: 180px; height: 180px;
+      background: rgba(255,255,255,0.05); border-radius: 50%;
+    }
+
+    .header-top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 48px 20px;
+      position: relative; z-index: 1;
+    }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 50px; height: 50px; background: white;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    }
+    .logo-text h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px; font-weight: 800; color: white; line-height: 1.1;
+    }
+    .logo-text p { font-size: 10px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+    .header-badge {
+      text-align: right;
+    }
+    .header-badge .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white; font-size: 10px; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .header-badge .web {
+      display: block; color: rgba(255,255,255,0.85);
+      font-size: 12px; font-weight: 600; margin-top: 6px;
+    }
+
+    /* Hero box */
+    .hero-box {
+      padding: 0 48px 28px;
+      position: relative; z-index: 1;
+    }
+    .hero-box h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px; font-weight: 900; color: white;
+      line-height: 1.25; margin-bottom: 10px;
+    }
+    .hero-box h2 span {
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-box p {
+      font-size: 13px; color: rgba(255,255,255,0.82);
+      line-height: 1.7; max-width: 420px;
+    }
+
+    /* Quick pills */
+    .pills {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 14px 48px 20px;
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .pill {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white; font-size: 11px; font-weight: 600;
+      padding: 5px 14px; border-radius: 20px;
+      display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ══════════════════════════════════════
+       BODY
+    ══════════════════════════════════════ */
+    .body { padding: 28px 48px; }
+
+    /* Section title */
+    .sec-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px; font-weight: 700; color: #4f46e5;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #ede9fe;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sec-title .ic {
+      width: 24px; height: 24px;
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: white;
+    }
+
+    /* ── WHAT IS KYC ── */
+    .what-box {
+      background: linear-gradient(135deg, #f5f3ff, #eff6ff);
+      border-left: 4px solid #7c3aed;
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin-bottom: 26px;
+    }
+    .what-box p { font-size: 13px; line-height: 1.75; color: #374151; }
+    .what-box strong { color: #4f46e5; }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: flex; gap: 12px; margin-bottom: 26px;
+    }
+    .stat {
+      flex: 1; border-radius: 12px;
+      padding: 14px 10px; text-align: center; color: white;
+    }
+    .stat.s1 { background: linear-gradient(135deg,#7c3aed,#4f46e5); }
+    .stat.s2 { background: linear-gradient(135deg,#0891b2,#06b6d4); }
+    .stat.s3 { background: linear-gradient(135deg,#065f46,#059669); }
+    .stat.s4 { background: linear-gradient(135deg,#92400e,#d97706); }
+    .stat .num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px; font-weight: 800; line-height: 1;
+    }
+    .stat .lbl {
+      font-size: 9.5px; font-weight: 500; opacity: 0.85;
+      margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* ── STEP-BY-STEP HOW TO USE ── */
+    .how-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 26px;
+    }
+    .how-card {
+      border: 1.5px solid #ede9fe;
+      border-radius: 12px; padding: 14px 16px;
+      background: #faf8ff;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .how-card .step-badge {
+      min-width: 34px; height: 34px;
+      background: linear-gradient(135deg,#7c3aed,#4f46e5);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 16px; font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+    }
+    .how-card h4 {
+      font-size: 13px; font-weight: 700; color: #3730a3; margin-bottom: 4px;
+    }
+    .how-card p { font-size: 11.5px; color: #4b5563; line-height: 1.6; }
+
+    /* ── FEATURES STUDENTS GET ── */
+    .features-big {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px; margin-bottom: 26px;
+    }
+    .feat-card {
+      border-radius: 12px; padding: 14px 12px; text-align: center;
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+      border: 1.5px solid #ddd6fe;
+    }
+    .feat-card .f-icon { font-size: 26px; margin-bottom: 7px; }
+    .feat-card h4 {
+      font-size: 12px; font-weight: 700; color: #3730a3; margin-bottom: 4px;
+    }
+    .feat-card p { font-size: 10.5px; color: #6b7280; line-height: 1.55; }
+
+    /* ── WHAT INFO YOU FIND ── */
+    .info-table {
+      width: 100%; border-collapse: collapse;
+      margin-bottom: 26px; font-size: 12px;
+    }
+    .info-table thead tr {
+      background: linear-gradient(135deg,#7c3aed,#4f46e5); color: white;
+    }
+    .info-table thead th {
+      padding: 9px 14px; text-align: left;
+      font-size: 10.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .info-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .info-table thead th:last-child  { border-radius: 0 8px 0 0; }
+    .info-table tbody tr:nth-child(even) { background: #f5f3ff; }
+    .info-table tbody td {
+      padding: 8px 14px; border-bottom: 1px solid #e5e7eb; color: #374151;
+    }
+    .info-table tbody td:first-child { font-weight: 700; color: #4f46e5; }
+    .tag-free {
+      display: inline-block; background: #d1fae5; color: #065f46;
+      font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 10px;
+    }
+
+    /* ── TWO COL ── */
+    .two-col { display: flex; gap: 18px; margin-bottom: 26px; }
+    .two-col > div { flex: 1; }
+
+    /* ── CHECKLIST ── */
+    .checklist { display: flex; flex-direction: column; gap: 7px; }
+    .cl-item {
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .cl-item .ck {
+      width: 18px; height: 18px; min-width: 18px;
+      background: linear-gradient(135deg,#7c3aed,#2563eb);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 9.5px; font-weight: 800; margin-top: 1px;
+    }
+    .cl-item span { font-size: 11.5px; color: #374151; line-height: 1.5; }
+
+    /* ── TIP BOX ── */
+    .tip-box {
+      background: linear-gradient(135deg,#fffbeb,#fef3c7);
+      border: 1.5px solid #fcd34d;
+      border-radius: 12px; padding: 14px 18px;
+    }
+    .tip-box h4 {
+      font-size: 12.5px; font-weight: 700; color: #92400e; margin-bottom: 8px;
+    }
+    .tip-box ul { padding-left: 16px; }
+    .tip-box ul li {
+      font-size: 11.5px; color: #78350f; line-height: 1.65; margin-bottom: 4px;
+    }
+
+    /* ── CTA BOX ── */
+    .cta-box {
+      background: linear-gradient(135deg,#7c3aed,#4f46e5,#2563eb);
+      border-radius: 14px; padding: 22px 28px;
+      margin-bottom: 26px; text-align: center;
+      color: white; position: relative; overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 140px; height: 140px;
+      background: rgba(255,255,255,0.07); border-radius: 50%;
+    }
+    .cta-box h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px; font-weight: 800; margin-bottom: 8px;
+      position: relative; z-index: 1;
+    }
+    .cta-box p {
+      font-size: 12px; opacity: 0.88; margin-bottom: 16px;
+      position: relative; z-index: 1; line-height: 1.6;
+    }
+    .cta-btns {
+      display: flex; gap: 12px; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .btn-white {
+      background: white; color: #4f46e5;
+      padding: 10px 24px; border-radius: 8px;
+      font-weight: 800; font-size: 12px;
+      text-decoration: none; display: inline-block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.6);
+      color: white; padding: 10px 24px; border-radius: 8px;
+      font-weight: 700; font-size: 12px;
+      text-decoration: none; display: inline-block;
+    }
+
+    /* ══════════════════════════════════════
+       CONTACT STRIP
+    ══════════════════════════════════════ */
+    .contact-strip {
+      background: #3730a3; color: white;
+      padding: 14px 48px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 10px;
+    }
+    .c-item { display: flex; align-items: center; gap: 8px; }
+    .c-item .ci {
+      width: 28px; height: 28px;
+      background: rgba(255,255,255,0.15); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 13px;
+    }
+    .c-item div label {
+      font-size: 8.5px; text-transform: uppercase;
+      letter-spacing: 0.5px; opacity: 0.6; display: block;
+    }
+    .c-item div span { font-size: 11.5px; font-weight: 600; }
+
+    /* FOOTER */
+    .footer-bar {
+      background: #1e1b4b; color: rgba(255,255,255,0.5);
+      font-size: 9.5px; padding: 9px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bar span { color: rgba(255,255,255,0.65); }
+
+    /* PRINT */
+    @media print {
+      body { background: white; }
+      .page { margin: 0; box-shadow: none; width: 100%; }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="header">
+    <div class="header-top">
+      <div class="logo-area">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text">
+          <h1>Know Your Campus</h1>
+          <p>India's Trusted College Discovery Platform</p>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="tag">Student Guide</span>
+        <span class="web">www.knowyourcampus.in</span>
+      </div>
+    </div>
+
+    <div class="hero-box">
+      <h2>Find Your <span>Dream College</span><br/>— All in One Place</h2>
+      <p>
+        Search, compare, and explore colleges across Madhya Pradesh.
+        Get complete information on fees, seats, cutoffs, and reviews —
+        before you apply.
+      </p>
+    </div>
+
+    <div class="pills">
+      <span class="pill">🔍 Search Colleges</span>
+      <span class="pill">⚖️ Compare Side by Side</span>
+      <span class="pill">💰 Check Fees</span>
+      <span class="pill">📊 See Seat Availability</span>
+      <span class="pill">✂️ View Cutoffs</span>
+      <span class="pill">⭐ Read Reviews</span>
+      <span class="pill">📝 Apply Online</span>
+    </div>
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="body">
+
+    <!-- WHAT IS KYC -->
+    <div class="what-box">
+      <p>
+        <strong>Know Your Campus</strong> is a free platform built especially for students like you.
+        Instead of visiting each college one by one or relying on incomplete information,
+        you can <strong>search, compare and understand everything</strong> about colleges —
+        courses, fees, seat availability, cutoffs, student reviews — all in one place,
+        from your phone or computer. <strong>100% free. No login required.</strong>
+      </p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat s1">
+        <div class="num">100+</div>
+        <div class="lbl">Colleges Listed</div>
+      </div>
+      <div class="stat s2">
+        <div class="num">500+</div>
+        <div class="lbl">Courses Available</div>
+      </div>
+      <div class="stat s3">
+        <div class="num">₹0</div>
+        <div class="lbl">Cost to Use</div>
+      </div>
+      <div class="stat s4">
+        <div class="num">MP Focus</div>
+        <div class="lbl">Regional Coverage</div>
+      </div>
+    </div>
+
+    <!-- HOW TO USE -->
+    <div class="sec-title">
+      <span class="ic">⚡</span>
+      How to Use Know Your Campus — Step by Step
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="step-badge">1</div>
+        <div>
+          <h4>Visit the Website</h4>
+          <p>Go to <strong>knowyourcampus.in</strong> on your phone or computer — no login, no signup needed.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="step-badge">2</div>
+        <div>
+          <h4>Search or Browse Colleges</h4>
+          <p>Type a college name, city, or course in the search bar. Or use filters — Government / Private, NAAC rating, city.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="step-badge">3</div>
+        <div>
+          <h4>Open a College Profile</h4>
+          <p>Click any college to view its full profile — courses, fees, seats, cutoffs, facilities and student reviews.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="step-badge">4</div>
+        <div>
+          <h4>Compare Colleges</h4>
+          <p>Select 2–3 colleges and click Compare to see them side by side. Makes your decision much easier.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="step-badge">5</div>
+        <div>
+          <h4>Write a Review</h4>
+          <p>Already studying? Help other students by writing an honest review and rating for your college.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="step-badge">6</div>
+        <div>
+          <h4>Submit Admission Inquiry</h4>
+          <p>Interested in a college? Fill the admission form — the college team will contact you directly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES GRID -->
+    <div class="sec-title">
+      <span class="ic">🌟</span>
+      Everything You Get — Completely Free
+    </div>
+    <div class="features-big">
+      <div class="feat-card">
+        <div class="f-icon">🔍</div>
+        <h4>Smart Search</h4>
+        <p>Search by college name, city, course or stream. Find colleges in seconds.</p>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">⚖️</div>
+        <h4>College Comparison</h4>
+        <p>Compare 2–3 colleges side by side — fees, seats, cutoffs at a glance.</p>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">💰</div>
+        <h4>Detailed Fee Info</h4>
+        <p>Tuition fee, hostel fee, lab fee — full breakdown per course and year.</p>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">💺</div>
+        <h4>Seat Availability</h4>
+        <p>Category-wise seats — General, OBC, SC, ST, EWS — updated regularly.</p>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">✂️</div>
+        <h4>Cutoff Data</h4>
+        <p>JEE / NEET / CAT cutoffs by round, year, and category — check your eligibility.</p>
+      </div>
+      <div class="feat-card">
+        <div class="f-icon">⭐</div>
+        <h4>Student Reviews</h4>
+        <p>Real reviews and star ratings from actual students. Know before you go.</p>
+      </div>
+    </div>
+
+    <!-- WHAT INFO + TIPS -->
+    <div class="two-col">
+      <div>
+        <div class="sec-title" style="font-size:13px;">
+          <span class="ic">📋</span>
+          Information Available per College
+        </div>
+        <table class="info-table">
+          <thead>
+            <tr><th>Information</th><th>Details</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>College Profile</td>
+              <td>Type, NAAC, city, facilities</td>
+              <td><span class="tag-free">FREE</span></td>
+            </tr>
+            <tr>
+              <td>All Courses</td>
+              <td>B.Tech, MBA, BCA, MCA, Diploma…</td>
+              <td><span class="tag-free">FREE</span></td>
+            </tr>
+            <tr>
+              <td>Fee Structure</td>
+              <td>Tuition, hostel, total per year</td>
+              <td><span class="tag-free">FREE</span></td>
+            </tr>
+            <tr>
+              <td>Seat Matrix</td>
+              <td>General / OBC / SC / ST / EWS</td>
+              <td><span class="tag-free">FREE</span></td>
+            </tr>
+            <tr>
+              <td>Cutoff Marks</td>
+              <td>By exam, round &amp; category</td>
+              <td><span class="tag-free">FREE</span></td>
+            </tr>
+            <tr>
+              <td>Student Reviews</td>
+              <td>Ratings + written feedback</td>
+              <td><span class="tag-free">FREE</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class="sec-title" style="font-size:13px;">
+          <span class="ic">✅</span>
+          What You Should Check
+        </div>
+        <div class="checklist" style="margin-bottom:14px;">
+          <div class="cl-item"><span class="ck">✓</span><span>Check NAAC rating — A++ or A+ colleges are top ranked</span></div>
+          <div class="cl-item"><span class="ck">✓</span><span>Read at least 5–6 student reviews before deciding</span></div>
+          <div class="cl-item"><span class="ck">✓</span><span>Compare total fees including hostel and other charges</span></div>
+          <div class="cl-item"><span class="ck">✓</span><span>Check seat availability in your category (OBC/SC/ST)</span></div>
+          <div class="cl-item"><span class="ck">✓</span><span>Verify cutoff for your exam score before applying</span></div>
+          <div class="cl-item"><span class="ck">✓</span><span>Use the Compare tool before making a final decision</span></div>
+        </div>
+
+        <div class="tip-box">
+          <h4>💡 Pro Tips for Students</h4>
+          <ul>
+            <li>Use filters to find colleges with <strong>Admission Open</strong> right now</li>
+            <li>Government colleges have lower fees — filter by type</li>
+            <li>Submit inquiry for multiple colleges — compare responses</li>
+            <li>Check exam notification bar for latest exam dates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA BOX -->
+    <div class="cta-box">
+      <h3>🚀 Start Exploring Colleges Right Now</h3>
+      <p>
+        No registration required. Just visit the website, search for your preferred college or course,<br/>
+        and get all the information you need to make the right decision.
+      </p>
+      <div class="cta-btns">
+        <a class="btn-white" href="https://knowyourcampus.in">Visit knowyourcampus.in</a>
+        <a class="btn-outline" href="mailto:princesulekhiya2004@gmail.com">Ask a Question</a>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- ══ CONTACT STRIP ══ -->
+  <div class="contact-strip">
+    <div class="c-item">
+      <div class="ci">🌐</div>
+      <div>
+        <label>Website</label>
+        <span>www.knowyourcampus.in</span>
+      </div>
+    </div>
+    <div class="c-item">
+      <div class="ci">📧</div>
+      <div>
+        <label>Email</label>
+        <span>princesulekhiya2004@gmail.com</span>
+      </div>
+    </div>
+    <div class="c-item">
+      <div class="ci">📱</div>
+      <div>
+        <label>WhatsApp</label>
+        <span>+91 90095 36046</span>
+      </div>
+    </div>
+    <div class="c-item">
+      <div class="ci">📍</div>
+      <div>
+        <label>Location</label>
+        <span>Bhopal, Madhya Pradesh</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="footer-bar">
+    <span>© 2026 Know Your Campus. All rights reserved.</span>
+    <span>Free for Students | knowyourcampus.in</span>
+  </div>
+
+</div>
+</body>
+</html>

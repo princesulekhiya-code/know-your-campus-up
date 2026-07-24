@@ -9,13 +9,49 @@ const ExamNotificationBar = () => {
     const containerRef = useRef(null);
     const contentRef = useRef(null);
 
+    const defaultNotifications = [
+        {
+            id: 'default-1',
+            text: '🔥 NEET UG 2026 Exam Schedule & MP State Quota Seats Announced - Apply Now',
+            eventDate: 'MAY 2026',
+            isUrgent: true,
+            link: '/admission'
+        },
+        {
+            id: 'default-2',
+            text: '🎓 MP DME Medical Counselling 2026: Choice Filling for MBBS & BDS Seats Starts Soon',
+            eventDate: 'JUN 2026',
+            isUrgent: true,
+            link: '/admission'
+        },
+        {
+            id: 'default-3',
+            text: '🌿 Top Private BAMS (Ayurveda) Colleges in Bhopal Admissions Open 2026-27',
+            eventDate: 'OPEN NOW',
+            isUrgent: false,
+            link: '/colleges'
+        },
+        {
+            id: 'default-4',
+            text: '🦷 Peoples & Mansarovar Dental College Bhopal BDS Seat Matrix & Fee Details Released',
+            eventDate: 'UPDATED',
+            isUrgent: false,
+            link: '/colleges'
+        }
+    ];
+
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
                 const response = await notificationService.getActive();
-                setNotifications(response.data);
+                if (response.data && response.data.length > 0) {
+                    setNotifications(response.data);
+                } else {
+                    setNotifications(defaultNotifications);
+                }
             } catch (error) {
-                console.error('Failed to fetch notifications:', error);
+                console.error('Failed to fetch notifications, using default updates:', error);
+                setNotifications(defaultNotifications);
             }
         };
 
@@ -45,7 +81,7 @@ const ExamNotificationBar = () => {
         };
     }, [notifications]);
 
-    if (notifications.length === 0) return null;
+    const activeList = notifications.length > 0 ? notifications : defaultNotifications;
 
     const NotificationItem = ({ note }) => (
         <span className="inline-flex items-center space-x-3 text-sm text-brand-50 relative z-20">
@@ -56,7 +92,7 @@ const ExamNotificationBar = () => {
                 </span>
             )}
             {note.link ? (
-                <a href={note.link} target="_blank" rel="noopener noreferrer" className={`hover:underline hover:text-white transition-colors ${note.isUrgent ? "font-bold text-white" : ""}`}>
+                <a href={note.link} className={`hover:underline hover:text-white transition-colors ${note.isUrgent ? "font-bold text-white" : ""}`}>
                     {note.text}
                 </a>
             ) : (
@@ -80,20 +116,20 @@ const ExamNotificationBar = () => {
                             animate={{ x: ["-0%", "-50%"] }}
                             transition={{
                                 repeat: Infinity,
-                                duration: Math.max(20, notifications.length * 8),
+                                duration: Math.max(20, activeList.length * 8),
                                 ease: "linear"
                             }}
                             style={{ width: "fit-content", minWidth: "200%" }}
                         >
                             {/* First Set */}
-                            <div className="flex items-center space-x-16 pr-16 bg-blue-500/0">
-                                {notifications.map((note, index) => (
+                            <div className="flex items-center space-x-16 pr-16">
+                                {activeList.map((note, index) => (
                                     <NotificationItem key={`orig-${index}`} note={note} />
                                 ))}
                             </div>
                             {/* Duplicate Set for Loop */}
-                            <div className="flex items-center space-x-16 pr-16 bg-red-500/0">
-                                {notifications.map((note, index) => (
+                            <div className="flex items-center space-x-16 pr-16">
+                                {activeList.map((note, index) => (
                                     <NotificationItem key={`dup-${index}`} note={note} />
                                 ))}
                             </div>
@@ -102,7 +138,7 @@ const ExamNotificationBar = () => {
                         // Static content for measurement and display if short
                         <div ref={contentRef} className="flex items-center whitespace-nowrap pl-4 w-full">
                             <div className="flex items-center space-x-16">
-                                {notifications.map((note, index) => (
+                                {activeList.map((note, index) => (
                                     <NotificationItem key={index} note={note} />
                                 ))}
                             </div>
@@ -119,3 +155,4 @@ const ExamNotificationBar = () => {
 };
 
 export default ExamNotificationBar;
+

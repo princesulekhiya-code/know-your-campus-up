@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
@@ -14,6 +15,8 @@ const Colleges = () => {
     const [colleges, setColleges] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({});
+
+    const stream = searchParams.get('stream') || searchParams.get('type') || '';
 
     const loadColleges = useCallback(async (filterParams = {}) => {
         setLoading(true);
@@ -85,6 +88,11 @@ const Colleges = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+            <SEO
+                title={stream ? `Top ${stream} Private Colleges in Bhopal & MP 2026` : "Top Private Colleges in MP & Bhopal 2026 | BAMS, MBBS, BDS, B.Tech"}
+                description="Explore complete list of top private BAMS, MBBS, BDS, B.Tech and MBA colleges in Bhopal and Madhya Pradesh with fees, cutoffs, seat matrix, and direct admission guide."
+                keywords="top bams private college bhopal, top mbbs private college bhopal, top bds private college bhopal, top btech private college bhopal, top private college mp, best medical colleges in bhopal, top engineering colleges in bhopal, neet cutoff bhopal"
+            />
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <div className="mb-8">

@@ -6,7 +6,8 @@
       "Read(//d/**)",
       "Bash(curl:*)",
       "WebFetch(domain:commons.wikimedia.org)",
-      "WebFetch(domain:www.shikshahub.com)"
+      "WebFetch(domain:www.shikshahub.com)",
+      "Bash(powershell -Command:*)"
     ]
   }
 }

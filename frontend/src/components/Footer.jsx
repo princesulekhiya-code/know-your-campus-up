@@ -12,11 +12,18 @@ const Footer = () => {
             { name: 'Compare Colleges', path: '/compare' },
             { name: 'Apply for Admission', path: '/admission' },
         ],
-        'Popular Searches': [
-            { name: 'Government Colleges', path: '/colleges?type=GOVERNMENT' },
-            { name: 'Private Colleges', path: '/colleges?type=PRIVATE' },
-            { name: 'Top Rated (A++)', path: '/colleges?naacRating=A%2B%2B' },
-            { name: 'Engineering Colleges', path: '/colleges' },
+        'Top Bhopal & MP Searches': [
+            { name: 'Top BAMS Private College Bhopal', path: '/colleges?search=BAMS' },
+            { name: 'Top MBBS Private College Bhopal', path: '/colleges?search=MBBS' },
+            { name: 'Top BDS Private College Bhopal', path: '/colleges?search=BDS' },
+            { name: 'Top Private B.Tech College Bhopal', path: '/colleges?search=B.Tech' },
+            { name: 'Top Private Colleges in MP', path: '/colleges?state=Madhya+Pradesh' },
+        ],
+        'Course Admissions 2026': [
+            { name: 'BAMS Admissions 2026', path: '/admission' },
+            { name: 'MBBS Admissions 2026', path: '/admission' },
+            { name: 'B.Tech Admissions 2026', path: '/admission' },
+            { name: 'BDS & Nursing Admissions', path: '/admission' },
         ],
     };
 
