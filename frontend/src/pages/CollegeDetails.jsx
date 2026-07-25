@@ -10,6 +10,7 @@ import StarRating from '../components/StarRating';
 import collegeService, { courseService, seatService, feeService, cutoffService } from '../services/collegeService';
 import reviewService from '../services/reviewService';
 import trackPageVisit from '../utils/tracking';
+import { getCollegeBanner, getCollegeLogo } from '../utils/collegeImages';
 
 const CollegeDetails = () => {
     const { id } = useParams();
@@ -90,10 +91,16 @@ const CollegeDetails = () => {
                 keywords={`${college.name}, ${college.name} fees, ${college.name} admission 2026, ${college.name} cutoff, colleges in ${college.city}, top private college ${college.city}, top colleges in ${college.state}`}
             />
             {/* Banner */}
-            <div className="h-64 bg-gradient-to-r from-primary-600 to-secondary-600 relative">
-                {college.bannerUrl && (
-                    <img src={college.bannerUrl} alt={college.name} className="w-full h-full object-cover" />
-                )}
+            <div className="h-64 bg-gradient-to-r from-primary-600 to-secondary-600 relative overflow-hidden">
+                <img
+                    src={getCollegeBanner(college)}
+                    alt={college.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://images.unsplash.com/photo-1562774053-701939374585?w=1000&auto=format&fit=crop&q=80";
+                    }}
+                />
                 <div className="absolute inset-0 bg-black/40"></div>
             </div>
 
@@ -101,9 +108,15 @@ const CollegeDetails = () => {
                 {/* College Header Card */}
                 <div className="card p-8 mb-8">
                     <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6">
-                        {college.logoUrl && (
-                            <img src={college.logoUrl} alt={college.name} className="w-24 h-24 rounded-lg shadow-lg" />
-                        )}
+                        <img
+                            src={getCollegeLogo(college)}
+                            alt={college.name}
+                            className="w-24 h-24 rounded-lg shadow-lg object-cover border-2 border-white dark:border-gray-800 bg-white"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = getCollegeBanner(college);
+                            }}
+                        />
                         <div className="flex-1">
                             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                                 {college.name}

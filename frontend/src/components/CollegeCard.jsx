@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiMapPin, FiAward, FiCalendar, FiCheckCircle } from 'react-icons/fi';
+import { getCollegeBanner } from '../utils/collegeImages';
 
 const CollegeCard = ({ college }) => {
+    const bannerImage = getCollegeBanner(college);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -14,19 +17,15 @@ const CollegeCard = ({ college }) => {
                 <div className="card overflow-hidden h-full hover-lift">
                     {/* Banner Image */}
                     <div className="relative h-48 bg-gradient-to-br from-action-500 to-action-700 overflow-hidden">
-                        {college.bannerUrl ? (
-                            <img
-                                src={college.bannerUrl}
-                                alt={college.name}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                            />
-                        ) : null}
-                        <div className="w-full h-full flex items-center justify-center" style={{ display: college.bannerUrl ? 'none' : 'flex' }}>
-                            <span className="text-white text-4xl font-bold opacity-20">
-                                {college.name.charAt(0)}
-                            </span>
-                        </div>
+                        <img
+                            src={bannerImage}
+                            alt={college.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = "https://images.unsplash.com/photo-1562774053-701939374585?w=1000&auto=format&fit=crop&q=80";
+                            }}
+                        />
                         {college.admissionOpen && (
                             <motion.div
                                 initial={{ scale: 0 }}
