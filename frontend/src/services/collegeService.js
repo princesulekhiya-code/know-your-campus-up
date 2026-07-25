@@ -1,29 +1,89 @@
 import api from './api';
 
+const getCache = (key) => {
+    try {
+        const item = sessionStorage.getItem(key);
+        if (item) return JSON.parse(item);
+    } catch (e) { }
+    return null;
+};
+
+const setCache = (key, data) => {
+    try {
+        sessionStorage.setItem(key, JSON.stringify(data));
+    } catch (e) { }
+};
+
 export const collegeService = {
-    // Get all colleges with optional filters
-    getAll: (filters = {}) => {
+    // Get all colleges with optional filters (Instant 0ms caching)
+    getAll: async (filters = {}) => {
         const params = new URLSearchParams();
         Object.keys(filters).forEach(key => {
             if (filters[key]) params.append(key, filters[key]);
         });
-        return api.get(`/colleges?${params.toString()}`);
+        const cacheKey = `colleges_all_${params.toString()}`;
+        const cachedData = getCache(cacheKey);
+
+        const promise = api.get(`/colleges?${params.toString()}`).then(res => {
+            setCache(cacheKey, res.data);
+            return res;
+        });
+
+        if (cachedData) {
+            return { data: cachedData, fromCache: true };
+        }
+        return promise;
     },
 
-    // Get college by ID
-    getById: (id) => api.get(`/colleges/${id}`),
+    // Get college by ID (Instant 0ms caching)
+    getById: async (id) => {
+        const cacheKey = `college_id_${id}`;
+        const cachedData = getCache(cacheKey);
+
+        const promise = api.get(`/colleges/${id}`).then(res => {
+            setCache(cacheKey, res.data);
+            return res;
+        });
+
+        if (cachedData) {
+            return { data: cachedData, fromCache: true };
+        }
+        return promise;
+    },
 
     // Search colleges
-    search: (query) => api.get(`/colleges/search?q=${query}`),
+    search: async (query) => {
+        const cacheKey = `college_search_${query}`;
+        const cachedData = getCache(cacheKey);
+
+        const promise = api.get(`/colleges/search?q=${query}`).then(res => {
+            setCache(cacheKey, res.data);
+            return res;
+        });
+
+        if (cachedData) {
+            return { data: cachedData, fromCache: true };
+        }
+        return promise;
+    },
 
     // Create college (admin only)
-    create: (data) => api.post('/colleges', data),
+    create: (data) => {
+        sessionStorage.clear();
+        return api.post('/colleges', data);
+    },
 
     // Update college (admin only)
-    update: (id, data) => api.put(`/colleges/${id}`, data),
+    update: (id, data) => {
+        sessionStorage.clear();
+        return api.put(`/colleges/${id}`, data);
+    },
 
     // Delete college (admin only)
-    delete: (id) => api.delete(`/colleges/${id}`),
+    delete: (id) => {
+        sessionStorage.clear();
+        return api.delete(`/colleges/${id}`);
+    },
 };
 
 export const courseService = {
