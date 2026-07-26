@@ -182,13 +182,13 @@ const Footer = () => {
                 <div className="pt-8 border-t border-brand-200 dark:border-brand-800">
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         <p className="text-sm text-brand-500 dark:text-brand-400">
-                            © {currentYear} Know Your Campus. All rights reserved.
+                            © {currentYear} Know Your Campus™. All rights reserved. Founded & Managed by Mr. Prince Sulekhiya.
                         </p>
                         <div className="flex space-x-6">
-                            <Link to="/contact" className="text-sm text-brand-500 dark:text-brand-400 hover:text-action-600 dark:hover:text-action-400 transition-colors">
+                            <Link to="/privacy-policy" className="text-sm text-brand-500 dark:text-brand-400 hover:text-action-600 dark:hover:text-action-400 transition-colors font-medium">
                                 Privacy Policy
                             </Link>
-                            <Link to="/contact" className="text-sm text-brand-500 dark:text-brand-400 hover:text-action-600 dark:hover:text-action-400 transition-colors">
+                            <Link to="/terms-of-service" className="text-sm text-brand-500 dark:text-brand-400 hover:text-action-600 dark:hover:text-action-400 transition-colors font-medium">
                                 Terms of Service
                             </Link>
                         </div>

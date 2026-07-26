@@ -19,6 +19,8 @@ import CompareColleges from './pages/CompareColleges';
 import AdmissionForm from './pages/AdmissionForm';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -60,6 +62,8 @@ function App() {
                                 <Route path="/admission" element={<AdmissionForm />} />
                                 <Route path="/contact" element={<Contact />} />
                                 <Route path="/login" element={<Login />} />
+                                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                                <Route path="/terms-of-service" element={<TermsOfService />} />
                             </Route>
 
                             {/* Admin Routes - No Public Headers/Footers */}
