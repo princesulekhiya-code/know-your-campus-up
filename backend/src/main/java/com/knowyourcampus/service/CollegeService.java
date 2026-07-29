@@ -25,7 +25,46 @@ public class CollegeService {
     }
 
     public List<College> searchColleges(String query) {
-        return collegeRepository.searchColleges(query);
+        if (query == null || query.trim().isEmpty()) {
+            return collegeRepository.findAll();
+        }
+        String trimmed = query.trim();
+        java.util.Set<College> resultSet = new java.util.LinkedHashSet<>(collegeRepository.searchColleges(trimmed));
+
+        // Smart synonym expansion for medical terms
+        String lower = trimmed.toLowerCase();
+        if (lower.contains("bams")) {
+            resultSet.addAll(collegeRepository.searchColleges("Ayurved"));
+        } else if (lower.contains("ayurved")) {
+            resultSet.addAll(collegeRepository.searchColleges("BAMS"));
+        }
+        
+        if (lower.contains("bhms")) {
+            resultSet.addAll(collegeRepository.searchColleges("Homoeo"));
+            resultSet.addAll(collegeRepository.searchColleges("Homeo"));
+        } else if (lower.contains("homeo") || lower.contains("homoeo")) {
+            resultSet.addAll(collegeRepository.searchColleges("BHMS"));
+        }
+        
+        if (lower.contains("bds")) {
+            resultSet.addAll(collegeRepository.searchColleges("Dental"));
+            resultSet.addAll(collegeRepository.searchColleges("Dentistry"));
+        } else if (lower.contains("dental") || lower.contains("dentistry")) {
+            resultSet.addAll(collegeRepository.searchColleges("BDS"));
+        }
+        
+        if (lower.contains("bpt")) {
+            resultSet.addAll(collegeRepository.searchColleges("Physio"));
+        } else if (lower.contains("physio")) {
+            resultSet.addAll(collegeRepository.searchColleges("BPT"));
+        }
+
+        if (lower.contains("mbbs") || lower.contains("medical")) {
+            resultSet.addAll(collegeRepository.searchColleges("MBBS"));
+            resultSet.addAll(collegeRepository.searchColleges("Medicine"));
+        }
+
+        return new java.util.ArrayList<>(resultSet);
     }
 
     public List<College> filterColleges(String type, String city, String state, String naacRating,
