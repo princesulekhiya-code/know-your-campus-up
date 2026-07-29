@@ -73,6 +73,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/notifications/active", "/notifications/active").permitAll()
                         .requestMatchers("/api/reviews/college/**", "/reviews/college/**").permitAll()
                         .requestMatchers("/api/actuator/**", "/actuator/**").permitAll()
+                        .requestMatchers("/api/seed/**", "/seed/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
