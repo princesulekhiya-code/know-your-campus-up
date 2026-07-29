@@ -23,10 +23,15 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
 
         List<College> findByAdmissionOpen(Boolean admissionOpen);
 
-        @Query("SELECT c FROM College c WHERE " +
+        @Query("SELECT DISTINCT c FROM College c LEFT JOIN c.courses cr WHERE " +
                         "LOWER(c.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
                         "LOWER(c.city) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-                        "LOWER(c.state) LIKE LOWER(CONCAT('%', :query, '%'))")
+                        "LOWER(c.state) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+                        "LOWER(c.description) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+                        "LOWER(c.facilities) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+                        "LOWER(cr.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+                        "LOWER(cr.specialization) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+                        "LOWER(cr.degree) LIKE LOWER(CONCAT('%', :query, '%'))")
         List<College> searchColleges(@Param("query") String query);
 
         @Query("SELECT c FROM College c WHERE " +

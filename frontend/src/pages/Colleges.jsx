@@ -62,8 +62,9 @@ const Colleges = () => {
 
         trackPageVisit('/colleges', 'Colleges Listing');
 
-        // Check if there's a search query in URL
+        // Check if there's a search query or stream in URL
         const searchQuery = searchParams.get('search');
+        const streamQuery = searchParams.get('stream');
         const typeFilter = searchParams.get('type');
         const cityFilter = searchParams.get('city');
         const stateFilter = searchParams.get('state');
@@ -72,6 +73,9 @@ const Colleges = () => {
         if (searchQuery) {
             // If search query exists, perform search
             handleSearch(searchQuery);
+        } else if (streamQuery) {
+            // If stream query exists, perform search for stream
+            handleSearch(streamQuery);
         } else if (typeFilter || cityFilter || stateFilter || naacRating) {
             // If filters exist, load with filters
             const urlFilters = {};
