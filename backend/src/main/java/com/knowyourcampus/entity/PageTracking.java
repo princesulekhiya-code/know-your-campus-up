@@ -1,18 +1,12 @@
 package com.knowyourcampus.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "page_tracking")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PageTracking {
 
     @Id
@@ -39,4 +33,25 @@ public class PageTracking {
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime visitedAt;
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getPagePath() { return pagePath; }
+    public void setPagePath(String pagePath) { this.pagePath = pagePath; }
+    public String getPageTitle() { return pageTitle; }
+    public void setPageTitle(String pageTitle) { this.pageTitle = pageTitle; }
+    public Long getCollegeId() { return collegeId; }
+    public void setCollegeId(Long collegeId) { this.collegeId = collegeId; }
+    public Long getCourseId() { return courseId; }
+    public void setCourseId(Long courseId) { this.courseId = courseId; }
+    public String getIpAddress() { return ipAddress; }
+    public void setIpAddress(String ipAddress) { this.ipAddress = ipAddress; }
+    public String getSessionId() { return sessionId; }
+    public void setSessionId(String sessionId) { this.sessionId = sessionId; }
+    public String getUserAgent() { return userAgent; }
+    public void setUserAgent(String userAgent) { this.userAgent = userAgent; }
+    public String getReferrer() { return referrer; }
+    public void setReferrer(String referrer) { this.referrer = referrer; }
+    public LocalDateTime getVisitedAt() { return visitedAt; }
+    public void setVisitedAt(LocalDateTime visitedAt) { this.visitedAt = visitedAt; }
 }

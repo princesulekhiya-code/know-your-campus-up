@@ -41,6 +41,9 @@ public class DataSeeder implements CommandLineRunner {
         @Autowired
         private MPCollegeSeeder mpCollegeSeeder;
 
+        @Autowired
+        private MPMedicalCollegeSeeder mpMedicalCollegeSeeder;
+
         @Override
         public void run(String... args) throws Exception {
                 // Seed admin user if not exists
@@ -83,7 +86,14 @@ public class DataSeeder implements CommandLineRunner {
                         System.err.println("Error seeding MP colleges: " + e.getMessage());
                 }
 
-                System.out.println("✓ All MP colleges seeded/updated successfully!");
+                // Seed all MP Medical Colleges (MBBS, BAMS, BHMS, BDS, BPT)
+                try {
+                        mpMedicalCollegeSeeder.seedAllMPMedicalColleges();
+                } catch (Exception e) {
+                        System.err.println("Error seeding MP Medical colleges: " + e.getMessage());
+                }
+
+                System.out.println("✓ All MP colleges (including Medical) seeded/updated successfully!");
         }
 
         private void seedColleges() {

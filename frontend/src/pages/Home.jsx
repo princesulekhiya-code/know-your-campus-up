@@ -46,9 +46,9 @@ const Home = () => {
     return (
         <div className="animate-fade-in">
             <SEO
-                title="Top Private Colleges in MP & Bhopal 2026 | BAMS, MBBS, BDS, B.Tech Admissions"
-                description="Discover top private BAMS, MBBS, BDS & B.Tech colleges in Bhopal & MP. Compare fees, NEET cutoffs, seat matrix, student reviews & get direct admission support."
-                keywords="top bams private college bhopal, top mbbs private college bhopal, top bds private college bhopal, top btech private college bhopal, top private college mp, best private medical colleges in bhopal, top engineering colleges in bhopal, neet ug cutoff bhopal, mp dte counselling, direct admission btech bhopal, private ayurvedic colleges in mp, lnct bhopal, sirt bhopal, know your campus"
+                title="Top Medical Colleges in MP 2026 | MBBS, BAMS, BHMS, BDS, BPT Admission Fees Cutoff"
+                description="Find top MBBS, BAMS, BHMS, BDS, BPT & B.Tech colleges in Bhopal, Indore, Jabalpur & all Madhya Pradesh cities. Compare fees, NEET cutoffs, seat matrix, hostel, placement & get admission guidance. People's Medical College, Chirayu, LNMC, RKDF, GRMC Gwalior - all colleges with detailed info."
+                keywords="top mbbs private college bhopal, top bams college bhopal, best bhms college bhopal, top bds college bhopal mp, bpt college bhopal, top btech private college bhopal, medical colleges in mp, ayurvedic colleges in mp, dental colleges in mp, physiotherapy colleges bhopal, homeopathy colleges bhopal, peoples medical college bhopal fees, chirayu medical college admission, ln medical college bhopal, rkdf medical college bhopal mbbs fees, government medical college jabalpur, grmc gwalior admission, bams colleges in ujjain, dhanwantari ayurved college ujjain, neet ug cutoff mp 2026, mp neet counselling 2026, top private medical college indore, sri aurobindo medical college indore, index medical college indore, peoples dental academy bhopal, modern dental college indore, government homoeopathic college bhopal, government physiotherapy college bhopal, best medical college madhya pradesh, private mbbs college fees in bhopal, bams admission 2026 mp, bhms admission mp, bds admission bhopal, bpt admission mp, know your campus"
             />
             {/* Hero Section */}
             <section className="relative text-white py-24 md:py-32 overflow-hidden min-h-[520px] flex items-center">

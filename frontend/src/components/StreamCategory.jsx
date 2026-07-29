@@ -14,14 +14,46 @@ const StreamCategory = () => {
         },
         {
             id: 2,
-            title: "Medical",
-            count: "300+ Colleges",
+            title: "Medical (MBBS)",
+            count: "50+ Colleges in MP",
             image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80",
-            link: "/colleges?stream=Medical",
-            color: "from-green-600 to-green-800"
+            link: "/colleges?search=MBBS",
+            color: "from-emerald-600 to-emerald-800"
         },
         {
             id: 3,
+            title: "Ayurveda (BAMS)",
+            count: "30+ Colleges in MP",
+            image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80",
+            link: "/colleges?search=BAMS",
+            color: "from-green-600 to-green-800"
+        },
+        {
+            id: 4,
+            title: "Dental (BDS)",
+            count: "15+ Colleges in MP",
+            image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80",
+            link: "/colleges?search=BDS",
+            color: "from-cyan-600 to-cyan-800"
+        },
+        {
+            id: 5,
+            title: "Homeopathy (BHMS)",
+            count: "10+ Colleges in MP",
+            image: "https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=600&q=80",
+            link: "/colleges?search=BHMS",
+            color: "from-violet-600 to-violet-800"
+        },
+        {
+            id: 6,
+            title: "Physiotherapy (BPT)",
+            count: "10+ Colleges in MP",
+            image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+            link: "/colleges?search=BPT",
+            color: "from-rose-600 to-rose-800"
+        },
+        {
+            id: 7,
             title: "Management",
             count: "400+ Colleges",
             image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80",
@@ -29,7 +61,7 @@ const StreamCategory = () => {
             color: "from-purple-600 to-purple-800"
         },
         {
-            id: 4,
+            id: 8,
             title: "Commerce",
             count: "250+ Colleges",
             image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80",
@@ -37,15 +69,7 @@ const StreamCategory = () => {
             color: "from-orange-600 to-orange-800"
         },
         {
-            id: 5,
-            title: "Arts & Humanities",
-            count: "350+ Colleges",
-            image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80",
-            link: "/colleges?stream=Arts",
-            color: "from-pink-600 to-pink-800"
-        },
-        {
-            id: 6,
+            id: 9,
             title: "Law",
             count: "150+ Colleges",
             image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80",
@@ -63,7 +87,7 @@ const StreamCategory = () => {
                             Browse by Stream
                         </h2>
                         <p className="text-xl text-brand-600 dark:text-brand-400">
-                            Select your preferred field of study
+                            MBBS, BAMS, BHMS, BDS, BPT, B.Tech &amp; more — Find your field
                         </p>
                     </div>
                     <Link to="/colleges" className="hidden md:flex items-center text-action-600 font-semibold hover:text-action-700 transition-colors">
@@ -78,15 +102,16 @@ const StreamCategory = () => {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: index * 0.1 }}
+                                transition={{ duration: 0.3, delay: index * 0.08 }}
                                 whileHover={{ y: -5 }}
-                                className="group relative rounded-2xl overflow-hidden h-64 cursor-pointer shadow-lg"
+                                className="group relative rounded-2xl overflow-hidden h-56 cursor-pointer shadow-lg"
                             >
                                 {/* Background Image */}
                                 <img
                                     src={category.image}
-                                    alt={category.title}
+                                    alt={`${category.title} colleges in Madhya Pradesh`}
                                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    loading="lazy"
                                 />
 
                                 {/* Overlay */}

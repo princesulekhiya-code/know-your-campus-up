@@ -83,12 +83,19 @@ const CollegeDetails = () => {
         );
     }
 
+    // Generate course-specific keywords for SEO
+    const courseKeywords = courses.map(c => `${c.name} ${c.specialization || ''}`).join(', ');
+    const courseNames = courses.map(c => c.name).filter((v, i, a) => a.indexOf(v) === i).join(', ');
+    const collegeShortName = college.name.match(/\(([^)]+)\)/)?.[1] || college.name.split(' ').slice(0, 3).join(' ');
+
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
             <SEO
-                title={`${college.name}, ${college.city} - Admission 2026, Fees, Courses, Cutoffs`}
-                description={`${college.name} ${college.city} ${college.state}. Explore fees structure, courses offered, NEET/JEE cutoffs, seat matrix, student reviews and direct admission procedure on Know Your Campus.`}
-                keywords={`${college.name}, ${college.name} fees, ${college.name} admission 2026, ${college.name} cutoff, colleges in ${college.city}, top private college ${college.city}, top colleges in ${college.state}`}
+                title={`${college.name} - ${courseNames || 'Admission'} 2026 | Fees, Cutoff, Seat Matrix`}
+                description={`${college.name}, ${college.city}, ${college.state}. Explore ${courseNames || 'courses'} fees structure, NEET/JEE cutoffs, seat matrix, admission process, student reviews, hostel & placement details. Apply now on Know Your Campus.`}
+                keywords={`${college.name}, ${collegeShortName}, ${college.name} fees, ${college.name} fees structure, ${college.name} admission 2026, ${college.name} cutoff, ${college.name} seat matrix, ${college.name} courses, ${courseKeywords}, ${college.name} hostel, ${college.name} placement, ${college.name} review, ${college.type?.toLowerCase()} college ${college.city}, top colleges in ${college.city}, best ${courseNames} college ${college.city}, colleges in ${college.state}, ${college.city} medical college, ${college.city} ${college.type?.toLowerCase()} college fees`}
+                url={`https://knowyourcampus.in/colleges/${college.id}`}
+                college={college}
             />
             {/* Banner */}
             <div className="h-64 bg-gradient-to-r from-primary-600 to-secondary-600 relative overflow-hidden">
@@ -197,19 +204,17 @@ const CollegeDetails = () => {
                     <div className="space-y-6">
                         {/* Contact Info */}
                         <div className="card p-6">
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Contact Information</h3>
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Admission Guidance Helpline</h3>
                             <div className="space-y-4">
-                                {college.phone && (
-                                    <div className="flex items-start space-x-3">
-                                        <FiPhone className="w-5 h-5 text-primary-600 mt-1" />
-                                        <div>
-                                            <p className="font-semibold text-gray-900 dark:text-white">Phone</p>
-                                            <a href={`tel:${college.phone}`} className="text-primary-600 hover:underline">
-                                                {college.phone}
-                                            </a>
-                                        </div>
+                                <div className="flex items-start space-x-3">
+                                    <FiPhone className="w-5 h-5 text-primary-600 mt-1" />
+                                    <div>
+                                        <p className="font-semibold text-gray-900 dark:text-white">Admission Helpdesk (Prince Sulekhiya)</p>
+                                        <a href="tel:9009536046" className="text-primary-600 font-bold hover:underline">
+                                            +91 90095 36046
+                                        </a>
                                     </div>
-                                )}
+                                </div>
                                 {college.email && (
                                     <div className="flex items-start space-x-3">
                                         <FiMail className="w-5 h-5 text-primary-600 mt-1" />

@@ -89,9 +89,9 @@ const Colleges = () => {
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
             <SEO
-                title={stream ? `Top ${stream} Private Colleges in Bhopal & MP 2026` : "Top Private Colleges in MP & Bhopal 2026 | BAMS, MBBS, BDS, B.Tech"}
-                description="Explore complete list of top private BAMS, MBBS, BDS, B.Tech and MBA colleges in Bhopal and Madhya Pradesh with fees, cutoffs, seat matrix, and direct admission guide."
-                keywords="top bams private college bhopal, top mbbs private college bhopal, top bds private college bhopal, top btech private college bhopal, top private college mp, best medical colleges in bhopal, top engineering colleges in bhopal, neet cutoff bhopal"
+                title={stream ? `Top ${stream} Colleges in Bhopal & MP 2026 | Fees, Cutoff, Admission` : "All Medical & Engineering Colleges in MP 2026 | MBBS, BAMS, BHMS, BDS, BPT, B.Tech"}
+                description={`Complete list of ${stream || 'MBBS, BAMS, BHMS, BDS, BPT, B.Tech, MBA'} colleges in Bhopal, Indore, Jabalpur, Gwalior & all Madhya Pradesh cities. Compare fees, NEET/JEE cutoffs, seat matrix, hostel facilities & admission process. Government and private colleges.`}
+                keywords={`top mbbs college bhopal, top bams college bhopal, best bhms college mp, bds college bhopal, bpt college bhopal, medical colleges in mp list, ayurvedic colleges mp, dental colleges mp, physiotherapy colleges mp, homeopathy colleges mp, peoples medical college fees, chirayu medical college, ln medical college fees, rkdf medical college, government medical college mp, private medical college fees mp, neet cutoff mp, top engineering colleges bhopal, best private college indore, college admission 2026 mp`}
             />
             <div className="container mx-auto px-4">
                 {/* Header */}

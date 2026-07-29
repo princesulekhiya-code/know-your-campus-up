@@ -2,9 +2,6 @@ package com.knowyourcampus.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,9 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cutoffs")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Cutoff {
 
     @Id
@@ -50,4 +44,26 @@ public class Cutoff {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
+    // Explicit Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Course getCourse() { return course; }
+    public void setCourse(Course course) { this.course = course; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public String getAcademicYear() { return academicYear; }
+    public void setAcademicYear(String academicYear) { this.academicYear = academicYear; }
+    public String getRound() { return round; }
+    public void setRound(String round) { this.round = round; }
+    public BigDecimal getCutoffPercentage() { return cutoffPercentage; }
+    public void setCutoffPercentage(BigDecimal cutoffPercentage) { this.cutoffPercentage = cutoffPercentage; }
+    public Integer getCutoffRank() { return cutoffRank; }
+    public void setCutoffRank(Integer cutoffRank) { this.cutoffRank = cutoffRank; }
+    public String getExamType() { return examType; }
+    public void setExamType(String examType) { this.examType = examType; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }

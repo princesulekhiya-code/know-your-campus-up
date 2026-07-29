@@ -144,7 +144,7 @@ const CompareColleges = () => {
                                 <CompareRow label="Established" values={selectedColleges.map(c => c.establishedYear || 'N/A')} />
                                 <CompareRow label="Affiliated To" values={selectedColleges.map(c => c.affiliatedTo)} />
                                 <CompareRow label="Admission Status" values={selectedColleges.map(c => c.admissionOpen ? 'Open' : 'Closed')} />
-                                <CompareRow label="Phone" values={selectedColleges.map(c => c.phone || 'N/A')} />
+                                <CompareRow label="Admission Helpline" values={selectedColleges.map(() => '+91 90095 36046')} />
                                 <CompareRow label="Email" values={selectedColleges.map(c => c.email || 'N/A')} />
                             </tbody>
                         </table>

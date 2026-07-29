@@ -2,9 +2,6 @@ package com.knowyourcampus.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,9 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "courses")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Course {
 
     @Id
@@ -62,4 +56,34 @@ public class Course {
     @UpdateTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
+    // Explicit Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public College getCollege() { return college; }
+    public void setCollege(College college) { this.college = college; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getSpecialization() { return specialization; }
+    public void setSpecialization(String specialization) { this.specialization = specialization; }
+    public String getDegree() { return degree; }
+    public void setDegree(String degree) { this.degree = degree; }
+    public Integer getDurationYears() { return durationYears; }
+    public void setDurationYears(Integer durationYears) { this.durationYears = durationYears; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public String getEligibility() { return eligibility; }
+    public void setEligibility(String eligibility) { this.eligibility = eligibility; }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
+    public List<SeatMatrix> getSeatMatrices() { return seatMatrices; }
+    public void setSeatMatrices(List<SeatMatrix> seatMatrices) { this.seatMatrices = seatMatrices; }
+    public List<FeeStructure> getFeeStructures() { return feeStructures; }
+    public void setFeeStructures(List<FeeStructure> feeStructures) { this.feeStructures = feeStructures; }
+    public List<Cutoff> getCutoffs() { return cutoffs; }
+    public void setCutoffs(List<Cutoff> cutoffs) { this.cutoffs = cutoffs; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
