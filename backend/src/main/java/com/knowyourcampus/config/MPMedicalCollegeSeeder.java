@@ -1372,8 +1372,7 @@ public class MPMedicalCollegeSeeder {
                 if (realImage != null) {
                         college.setBannerUrl(realImage);
                 } else {
-                        String seed = name.replaceAll("[^a-zA-Z0-9]", "-").toLowerCase();
-                        college.setBannerUrl("https://picsum.photos/seed/" + seed + "/800/400");
+                        college.setBannerUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg");
                 }
                 String initials = getInitials(name);
                 String bgColor;
