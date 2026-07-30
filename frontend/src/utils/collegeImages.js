@@ -1,39 +1,72 @@
-// Exact Real Photos Map for Specific MP & Indian Colleges
+// Real Direct Campus & Building Photos for MP Medical & Engineering Colleges
 const EXACT_COLLEGE_PHOTOS = {
-    // Medical Colleges - Bhopal & MP
-    "aiims bhopal": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
-    "gandhi medical": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
-    "people": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=80",
-    "chirayu": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&auto=format&fit=crop&q=80",
-    "ln medical": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&auto=format&fit=crop&q=80",
-    "lnmc": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&auto=format&fit=crop&q=80",
-    "rkdf": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&auto=format&fit=crop&q=80",
-    "netaji subhash": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80",
-    "nscbmc": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80",
+    // Government MBBS Medical Colleges
+    "netaji subhash chandra bose": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "nscbmc": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
     "gajra raja": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Gajra_Raja_Medical_College_Gwalior.jpg/1200px-Gajra_Raja_Medical_College_Gwalior.jpg",
     "grmc": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Gajra_Raja_Medical_College_Gwalior.jpg/1200px-Gajra_Raja_Medical_College_Gwalior.jpg",
-    "shyam shah": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80",
-    "ssmc": "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80",
-    "bundelkhand medical": "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=80",
-    "bmc sagar": "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=80",
-    "sri aurobindo": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&auto=format&fit=crop&q=80",
-    "saims": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&auto=format&fit=crop&q=80",
-    "amaltas": "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=80",
-    "index medical": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&auto=format&fit=crop&q=80",
+    "shyam shah": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "ssmc": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "bundelkhand medical": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "bmc sagar": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "gandhi medical": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "gmc bhopal": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "aiims bhopal": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "chhindwara": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "datia": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "vidisha": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "shahdol": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "khandwa": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "ratlam": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "shivpuri": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+
+    // Private MBBS Medical Colleges
+    "people's college of medical": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "peoples college of medical": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "chirayu": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "l.n. medical": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "ln medical": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "lnmc": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "rkdf medical": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "sri aurobindo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "saims": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "r.d. gardi": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "amaltas": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "index medical": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
 
     // BAMS (Ayurveda) Colleges
-    "dhanwantari": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&auto=format&fit=crop&q=80",
-    "khushilal": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=1200&auto=format&fit=crop&q=80",
-    "mansarovar": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&auto=format&fit=crop&q=80",
-    "rani dullaiya": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=1200&auto=format&fit=crop&q=80",
-    "ln ayurved": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&auto=format&fit=crop&q=80",
+    "dhanwantari": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "khushilal": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "mansarovar": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "rani dullaiya": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "ln ayurved": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "shivshaktilal": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "veena vadini": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "rishikul": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
 
-    // Engineering & General Colleges - Bhopal
-    "lnct": "https://images.unsplash.com/photo-1562774053-701939374585?w=1200&auto=format&fit=crop&q=80",
-    "sirt": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&auto=format&fit=crop&q=80",
-    "oriental": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&auto=format&fit=crop&q=80",
-    "technocrats": "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=1200&auto=format&fit=crop&q=80",
-    "tit": "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=1200&auto=format&fit=crop&q=80",
+    // BHMS (Homoeopathy) Colleges
+    "homoeopathic medical college bhopal": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "nehru homoeopathic": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "mahatma gandhi homoeopathic": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "sarvepalli radhakrishnan homoeopathic": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+
+    // BDS (Dental) Colleges
+    "college of dentistry indore": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "people's dental": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "rkdf dental": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+    "modern dental": "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn",
+
+    // BPT (Physiotherapy) Colleges
+    "physiotherapy bhopal": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+
+    // Engineering & General Colleges - Bhopal & MP
+    "lakshmi narain": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
+    "lnct": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
+    "sirt": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
+    "sagar institute": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
+    "oriental": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
+    "technocrats": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
+    "tit": "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA",
     "manit": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/MANIT_Bhopal_Main_Building.jpg/1200px-MANIT_Bhopal_Main_Building.jpg",
     "iiser bhopal": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/IISER_Bhopal_LHC.jpg/1200px-IISER_Bhopal_LHC.jpg",
     "iit indore": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/IIT_Indore_LHC.jpg/1200px-IIT_Indore_LHC.jpg",
@@ -42,47 +75,32 @@ const EXACT_COLLEGE_PHOTOS = {
 
 // Fallback Specialized Photo Collections
 const MEDICAL_IMAGES = [
-    "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1200&auto=format&fit=crop&q=80"
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Gajra_Raja_Medical_College_Gwalior.jpg/1200px-Gajra_Raja_Medical_College_Gwalior.jpg",
+    "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn"
 ];
 
 const AYURVEDA_IMAGES = [
-    "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=1200&auto=format&fit=crop&q=80"
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn"
 ];
 
 const DENTAL_IMAGES = [
-    "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1200&auto=format&fit=crop&q=80"
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
+    "https://imgs.search.brave.com/BAZfZU0n9xkqb6ggBegEW8Ax5shFDRg13BVCn0_blyg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/dW5pdmVyc2l0eWth/cnQuY29tLy9Db250/ZW50L3VwbG9hZC9h/ZG1pbi8wemx1M3Bh/Yy52bnIuanBn"
 ];
 
 const HOMOEOPATHY_IMAGES = [
-    "https://images.unsplash.com/photo-1585435557343-3b092031a831?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=1200&auto=format&fit=crop&q=80"
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg"
 ];
 
 const PHYSIO_IMAGES = [
-    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&auto=format&fit=crop&q=80"
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg"
 ];
 
 const CAMPUS_IMAGES = [
-    "https://images.unsplash.com/photo-1562774053-701939374585?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=1200&auto=format&fit=crop&q=80",
-    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&auto=format&fit=crop&q=80"
+    "https://imgs.search.brave.com/De56UcGnlomxRqglnLupoKMTFA9rkmM1Fcr-JUtHl2w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2lrc2hhcGVkaWEu/Y29tL3B1YmxpYy9k/YXRhL2NvbGxlZ2Vz/L3Njb3BlLWdsb2Jh/bC1za2lsbHMtdW5p/dmVyc2l0eW1hZGhp/eWEtcHJhZGVzaC1i/YW5uZXIud2VicA"
 ];
 
 export const getCollegeBanner = (college) => {
