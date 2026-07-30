@@ -15,14 +15,11 @@ const REAL_COLLEGE_BUILDINGS = {
 };
 
 export const getCollegeBanner = (college) => {
-    // IGNORE any database url if it contains unsplash, placeholder, sample, or generic photo terms
+    // Only accept custom uploaded bannerUrl if it is explicitly from a custom storage domain
     const rawBanner = (college?.bannerUrl || '').trim();
     if (
         rawBanner !== '' &&
-        !rawBanner.includes('unsplash') &&
-        !rawBanner.includes('placeholder') &&
-        !rawBanner.includes('sample') &&
-        (rawBanner.startsWith('http://') || rawBanner.startsWith('https://'))
+        (rawBanner.includes('cloudinary') || rawBanner.includes('amazonaws') || rawBanner.includes('firebasestorage') || rawBanner.includes('/uploads/'))
     ) {
         return rawBanner;
     }
@@ -72,10 +69,7 @@ export const getCollegeLogo = (college) => {
     const rawLogo = (college?.logoUrl || '').trim();
     if (
         rawLogo !== '' &&
-        !rawLogo.includes('unsplash') &&
-        !rawLogo.includes('placeholder') &&
-        !rawLogo.includes('sample') &&
-        (rawLogo.startsWith('http://') || rawLogo.startsWith('https://'))
+        (rawLogo.includes('cloudinary') || rawLogo.includes('amazonaws') || rawLogo.includes('firebasestorage') || rawLogo.includes('/uploads/'))
     ) {
         return rawLogo;
     }
