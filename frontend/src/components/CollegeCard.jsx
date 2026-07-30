@@ -20,10 +20,11 @@ const CollegeCard = ({ college }) => {
                         <img
                             src={bannerImage}
                             alt={college.name}
+                            referrerPolicy="no-referrer"
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg";
+                                e.target.src = "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdXB3azYxNjY2NjYwLXdla3AtZWxlbWVudC1qb2I1OTQtYmFja2dyb3VuZF8xLmpwZw.jpg";
                             }}
                         />
                         {college.admissionOpen && (
