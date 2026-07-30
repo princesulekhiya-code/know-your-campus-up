@@ -105,7 +105,7 @@ const CollegeDetails = () => {
                     className="w-full h-full object-cover"
                     onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = "https://images.unsplash.com/photo-1562774053-701939374585?w=1000&auto=format&fit=crop&q=80";
+                        e.target.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg";
                     }}
                 />
                 <div className="absolute inset-0 bg-black/40"></div>
