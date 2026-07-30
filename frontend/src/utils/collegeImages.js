@@ -1,7 +1,6 @@
-// Real Direct Campus & Building Photos for All MP Medical, Dental, BAMS & Engineering Colleges
+// Real Direct Building Photos for MP Medical & Engineering Colleges
 
 const REAL_COLLEGE_BUILDINGS = {
-    // Verified Real Building URLs
     AIIMS: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/AIIMS_Bhopal_Hospital_Building.jpg/1200px-AIIMS_Bhopal_Hospital_Building.jpg",
     GMC: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Gandhi_Medical_College_Bhopal.jpg/1200px-Gandhi_Medical_College_Bhopal.jpg",
     GRMC: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Gajra_Raja_Medical_College_Gwalior.jpg/1200px-Gajra_Raja_Medical_College_Gwalior.jpg",
@@ -16,16 +15,23 @@ const REAL_COLLEGE_BUILDINGS = {
 };
 
 export const getCollegeBanner = (college) => {
-    // If DB bannerUrl is a valid non-unsplash image, use it
-    if (college?.bannerUrl && college.bannerUrl.trim() !== '' && !college.bannerUrl.includes('unsplash') && !college.bannerUrl.includes('placeholder')) {
-        return college.bannerUrl;
+    // IGNORE any database url if it contains unsplash, placeholder, sample, or generic photo terms
+    const rawBanner = (college?.bannerUrl || '').trim();
+    if (
+        rawBanner !== '' &&
+        !rawBanner.includes('unsplash') &&
+        !rawBanner.includes('placeholder') &&
+        !rawBanner.includes('sample') &&
+        (rawBanner.startsWith('http://') || rawBanner.startsWith('https://'))
+    ) {
+        return rawBanner;
     }
 
     const name = (college?.name || '').toLowerCase();
     const desc = (college?.description || '').toLowerCase();
     const fullText = `${name} ${desc}`;
 
-    // Specific match checks
+    // Specific match checks for Real Campus Buildings
     if (fullText.includes('gajra raja') || fullText.includes('grmc')) {
         return REAL_COLLEGE_BUILDINGS.GRMC;
     }
@@ -63,8 +69,15 @@ export const getCollegeBanner = (college) => {
 };
 
 export const getCollegeLogo = (college) => {
-    if (college?.logoUrl && college.logoUrl.trim() !== '' && !college.logoUrl.includes('unsplash') && !college.logoUrl.includes('placeholder')) {
-        return college.logoUrl;
+    const rawLogo = (college?.logoUrl || '').trim();
+    if (
+        rawLogo !== '' &&
+        !rawLogo.includes('unsplash') &&
+        !rawLogo.includes('placeholder') &&
+        !rawLogo.includes('sample') &&
+        (rawLogo.startsWith('http://') || rawLogo.startsWith('https://'))
+    ) {
+        return rawLogo;
     }
     return getCollegeBanner(college);
 };
